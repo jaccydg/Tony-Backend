@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Tony_Backend.API.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
