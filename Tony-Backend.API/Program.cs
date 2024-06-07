@@ -12,6 +12,7 @@ builder.Services.AddDbContext<AuthDbContext>(options => {
 });
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AuthDbContext>();
 
 builder.Services.AddControllers();
