@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.API", "Tony-Backend.API\Tony-Backend.API.csproj", "{ADB7AFFA-046E-49C4-BC90-C3F964AD187A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.API", "Tony-Backend.API\Tony-Backend.API.csproj", "{ADB7AFFA-046E-49C4-BC90-C3F964AD187A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.Application", "Tony-Backend.Application\Tony-Backend.Application.csproj", "{935375A3-7882-48A5-BC09-8B675633B4D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.Application", "Tony-Backend.Application\Tony-Backend.Application.csproj", "{935375A3-7882-48A5-BC09-8B675633B4D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.Infrastructure", "Tony-Backend.Infrastructure\Tony-Backend.Infrastructure.csproj", "{6143B5C2-6F13-441F-81A3-F6B48866DE0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.Infrastructure", "Tony-Backend.Infrastructure\Tony-Backend.Infrastructure.csproj", "{6143B5C2-6F13-441F-81A3-F6B48866DE0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.QueueAPI", "Tony-Backend.QueueAPI\Tony-Backend.QueueAPI.csproj", "{EF3BB0B0-2ED3-448F-8259-4484361A3659}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.QueueAPI", "Tony-Backend.QueueAPI\Tony-Backend.QueueAPI.csproj", "{EF3BB0B0-2ED3-448F-8259-4484361A3659}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.Receiver", "Tony-Backend.Receiver\Tony-Backend.Receiver.csproj", "{ABAC4217-1080-40C5-9C4D-7A779493D0A3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.Auth", "Tony-Backend.Auth\Tony-Backend.Auth.csproj", "{11138844-564A-43C7-82E8-51541DA64C8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.Receiver", "Tony-Backend.Receiver\Tony-Backend.Receiver.csproj", "{ABAC4217-1080-40C5-9C4D-7A779493D0A3}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{34138C4B-7367-4DE9-9889-870847F39481}"
 EndProject
@@ -43,10 +41,6 @@ Global
 		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11138844-564A-43C7-82E8-51541DA64C8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11138844-564A-43C7-82E8-51541DA64C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11138844-564A-43C7-82E8-51541DA64C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11138844-564A-43C7-82E8-51541DA64C8E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{34138C4B-7367-4DE9-9889-870847F39481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{34138C4B-7367-4DE9-9889-870847F39481}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34138C4B-7367-4DE9-9889-870847F39481}.Release|Any CPU.ActiveCfg = Release|Any CPU

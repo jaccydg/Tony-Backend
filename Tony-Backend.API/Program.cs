@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Tony_Backend.Auth.Data;
+using Tony_Backend.API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
