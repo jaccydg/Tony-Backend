@@ -1,0 +1,6 @@
+@Tony_Backend.QueueAPI_HostAddress = http://localhost:5148
+
+GET {{Tony_Backend.QueueAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

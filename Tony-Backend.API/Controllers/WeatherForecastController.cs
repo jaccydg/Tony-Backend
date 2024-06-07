@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Tony_Backend.Domain.Controllers
+namespace Tony_Backend.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

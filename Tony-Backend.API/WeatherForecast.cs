@@ -1,4 +1,4 @@
-namespace Tony_Backend.Domain
+namespace Tony_Backend.API
 {
     public class WeatherForecast
     {

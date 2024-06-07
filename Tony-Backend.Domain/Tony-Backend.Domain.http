@@ -1,6 +1,0 @@
-@Tony_Backend.Domain_HostAddress = http://localhost:5068
-
-GET {{Tony_Backend.Domain_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.9.34902.65
+VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.Domain", "Tony-Backend.Domain\Tony-Backend.Domain.csproj", "{F0E38498-2C21-45EC-B055-C53F3E2A2DFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.API", "Tony-Backend.API\Tony-Backend.API.csproj", "{ADB7AFFA-046E-49C4-BC90-C3F964AD187A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.Application", "Tony-Backend.Application\Tony-Backend.Application.csproj", "{935375A3-7882-48A5-BC09-8B675633B4D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.Infrastructure", "Tony-Backend.Infrastructure\Tony-Backend.Infrastructure.csproj", "{6143B5C2-6F13-441F-81A3-F6B48866DE0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.QueueAPI", "Tony-Backend.QueueAPI\Tony-Backend.QueueAPI.csproj", "{EF3BB0B0-2ED3-448F-8259-4484361A3659}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.Receiver", "Tony-Backend.Receiver\Tony-Backend.Receiver.csproj", "{ABAC4217-1080-40C5-9C4D-7A779493D0A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +19,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F0E38498-2C21-45EC-B055-C53F3E2A2DFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F0E38498-2C21-45EC-B055-C53F3E2A2DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F0E38498-2C21-45EC-B055-C53F3E2A2DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F0E38498-2C21-45EC-B055-C53F3E2A2DFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADB7AFFA-046E-49C4-BC90-C3F964AD187A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB7AFFA-046E-49C4-BC90-C3F964AD187A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB7AFFA-046E-49C4-BC90-C3F964AD187A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB7AFFA-046E-49C4-BC90-C3F964AD187A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{935375A3-7882-48A5-BC09-8B675633B4D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{935375A3-7882-48A5-BC09-8B675633B4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{935375A3-7882-48A5-BC09-8B675633B4D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{935375A3-7882-48A5-BC09-8B675633B4D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6143B5C2-6F13-441F-81A3-F6B48866DE0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6143B5C2-6F13-441F-81A3-F6B48866DE0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6143B5C2-6F13-441F-81A3-F6B48866DE0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6143B5C2-6F13-441F-81A3-F6B48866DE0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CC352DF1-14A7-458E-8939-EF4B992E8469}
+		SolutionGuid = {191C7BC2-87EB-41F6-9715-21887E7CB299}
 	EndGlobalSection
 EndGlobal
