@@ -11,7 +11,7 @@ using Tony_Backend.API.Data;
 
 namespace Tony_Backend.API.Migrations
 {
-    [DbContext(typeof(AuthDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20240607212616_InitialCreate")]
     partial class InitialCreate
     {
