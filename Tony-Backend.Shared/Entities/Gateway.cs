@@ -14,5 +14,8 @@ namespace Tony_Backend.Shared.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public GeoCoordinate Location { get; set; }
+
+        // Navigation properties
+        public ICollection<ChargingStation> ChargingStations { get; set; }
     }
 }
