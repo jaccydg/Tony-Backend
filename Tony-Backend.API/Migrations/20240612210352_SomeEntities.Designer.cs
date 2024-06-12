@@ -12,8 +12,8 @@ using Tony_Backend.API.Data;
 namespace Tony_Backend.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240612183823_ChargingStation")]
-    partial class ChargingStation
+    [Migration("20240612210352_SomeEntities")]
+    partial class SomeEntities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -240,6 +240,71 @@ namespace Tony_Backend.API.Migrations
                     b.HasIndex("GatewayId");
 
                     b.ToTable("ChargingStations");
+
+                    b.HasData(
+                        new
+                        {
+                            Number = 1,
+                            GatewayId = 1,
+                            LastLogId = 0,
+                            UserConnectedId = 0
+                        },
+                        new
+                        {
+                            Number = 2,
+                            GatewayId = 1,
+                            LastLogId = 0,
+                            UserConnectedId = 0
+                        },
+                        new
+                        {
+                            Number = 1,
+                            GatewayId = 2,
+                            LastLogId = 0,
+                            UserConnectedId = 0
+                        },
+                        new
+                        {
+                            Number = 2,
+                            GatewayId = 2,
+                            LastLogId = 0,
+                            UserConnectedId = 0
+                        },
+                        new
+                        {
+                            Number = 3,
+                            GatewayId = 2,
+                            LastLogId = 0,
+                            UserConnectedId = 0
+                        },
+                        new
+                        {
+                            Number = 1,
+                            GatewayId = 3,
+                            LastLogId = 0,
+                            UserConnectedId = 0
+                        },
+                        new
+                        {
+                            Number = 2,
+                            GatewayId = 3,
+                            LastLogId = 0,
+                            UserConnectedId = 0
+                        },
+                        new
+                        {
+                            Number = 3,
+                            GatewayId = 3,
+                            LastLogId = 0,
+                            UserConnectedId = 0
+                        },
+                        new
+                        {
+                            Number = 4,
+                            GatewayId = 3,
+                            LastLogId = 0,
+                            UserConnectedId = 0
+                        });
                 });
 
             modelBuilder.Entity("Tony_Backend.Shared.Entities.Gateway", b =>
@@ -250,6 +315,12 @@ namespace Tony_Backend.API.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -257,6 +328,29 @@ namespace Tony_Backend.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Gateways");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Latitude = 48.8566,
+                            Longitude = 2.3521999999999998,
+                            Name = "Gateway 1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Latitude = 48.8566,
+                            Longitude = 2.3512,
+                            Name = "Gateway 2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Latitude = 48.8566,
+                            Longitude = 2.3589000000000002,
+                            Name = "Gateway 3"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -319,46 +413,6 @@ namespace Tony_Backend.API.Migrations
                         .IsRequired();
 
                     b.Navigation("Gateway");
-                });
-
-            modelBuilder.Entity("Tony_Backend.Shared.Entities.Gateway", b =>
-                {
-                    b.OwnsOne("GeoCoordinatePortable.GeoCoordinate", "Location", b1 =>
-                        {
-                            b1.Property<int>("GatewayId")
-                                .HasColumnType("integer");
-
-                            b1.Property<double>("Altitude")
-                                .HasColumnType("double precision");
-
-                            b1.Property<double>("Course")
-                                .HasColumnType("double precision");
-
-                            b1.Property<double>("HorizontalAccuracy")
-                                .HasColumnType("double precision");
-
-                            b1.Property<double>("Latitude")
-                                .HasColumnType("double precision");
-
-                            b1.Property<double>("Longitude")
-                                .HasColumnType("double precision");
-
-                            b1.Property<double>("Speed")
-                                .HasColumnType("double precision");
-
-                            b1.Property<double>("VerticalAccuracy")
-                                .HasColumnType("double precision");
-
-                            b1.HasKey("GatewayId");
-
-                            b1.ToTable("Gateways");
-
-                            b1.WithOwner()
-                                .HasForeignKey("GatewayId");
-                        });
-
-                    b.Navigation("Location")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Tony_Backend.Shared.Entities.Gateway", b =>

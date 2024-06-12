@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Tony_Backend.Shared.Entities;
+using GeoCoordinatePortable;
 
 namespace Tony_Backend.API.Data
 {
@@ -28,12 +29,81 @@ namespace Tony_Backend.API.Data
                 .HasForeignKey(c => c.GatewayId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Configure GeoCoordinate as a value object
-            modelBuilder.Entity<Gateway>(entity =>
-            {
-                entity.OwnsOne(g => g.Location);
-            });
+
+            // SEED DATA
+
+            modelBuilder.Entity<Gateway>().HasData(
+                new Gateway
+                {
+                    Id = 1,
+                    Name = "Gateway 1",
+                    Latitude = 48.8566,
+                    Longitude = 2.3522
+                },
+                new Gateway
+                {
+                    Id = 2,
+                    Name = "Gateway 2",
+                    Latitude = 48.8566,
+                    Longitude = 2.3512
+                },
+                new Gateway
+                {
+                    Id = 3,
+                    Name = "Gateway 3",
+                    Latitude = 48.8566,
+                    Longitude = 2.3589
+                }) ;
+
+
+            modelBuilder.Entity<ChargingStation>().HasData(
+                new ChargingStation
+                {
+                    Number = 1,
+                    GatewayId = 1
+                },
+                new ChargingStation
+                {
+                    Number = 2,
+                    GatewayId = 1
+                },
+                new ChargingStation
+                {
+                    Number = 1,
+                    GatewayId = 2
+                },
+                new ChargingStation
+                {
+                    Number = 2,
+                    GatewayId = 2
+                },
+                new ChargingStation
+                {
+                    Number = 3,
+                    GatewayId = 2
+                },
+                new ChargingStation
+                {
+                    Number = 1,
+                    GatewayId = 3
+                },
+                new ChargingStation
+                {
+                    Number = 2,
+                    GatewayId = 3
+                },
+                new ChargingStation
+                {
+                    Number = 3,
+                    GatewayId = 3
+                },
+                new ChargingStation
+                {
+                    Number = 4,
+                    GatewayId = 3
+                });
         }
+
     }
 
 }

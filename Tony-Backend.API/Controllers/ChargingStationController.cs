@@ -23,8 +23,7 @@ namespace Tony_Backend.API.Controllers
             _context = context;
         }
 
-        [HttpGet(nameof(ChargingStation))]
-        [HttpGet(Name = "Create Charging Station")]
+        [HttpPost(nameof(Create))]
         public async Task Create(int Number, int GatewayId)
         {
             var chargingStation = new ChargingStation
