@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Tony_Backend.API.Data;
 using Tony_Backend.Shared.Entities;
-using GeoCoordinatePortable;
 using Tony_Backend.API.Migrations;
+using Tony_Backend.Application.Commands.GatewayCommands;
 
 
 namespace Tony_Backend.API.Controllers
@@ -18,10 +18,12 @@ namespace Tony_Backend.API.Controllers
     public class GatewayController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly ISender _sender;
 
-        public GatewayController(ApplicationDbContext context)
+        public GatewayController(ApplicationDbContext context, ISender sender)
         {
             _context = context;
+            _sender = sender;
         }
 
         [HttpGet(nameof(GetAllGateways))]
@@ -34,16 +36,14 @@ namespace Tony_Backend.API.Controllers
         public async Task<ActionResult<Gateway>> GetGatewayById(int id)
         {
             var gateway = await _context.Gateways.FindAsync(id);
+
             if (gateway == null)
             {
                 return NotFound();
             }
-
-            return gateway;
+            return Ok(gateway);
         }
 
-
-        //TODO: CHIEDERE SE FRONTEND MODIFICA CON TUTTI I CAPI PREIMPOSTATI OPPURE NO
         [HttpPost(nameof(Create))]
         public async Task<IActionResult> Create(string? name, double? latitude, double? longitude)
         {
@@ -61,7 +61,7 @@ namespace Tony_Backend.API.Controllers
             _context.Gateways.Add(gateway);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(gateway);
         }
 
         [HttpPut(nameof(Update))]

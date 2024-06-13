@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tony-Backend.Infrastructure\Tony-Backend.Infrastructure.csproj" />
     <ProjectReference Include="..\Tony-Backend.Shared\Tony-Backend.Shared.csproj" />
   </ItemGroup>
 

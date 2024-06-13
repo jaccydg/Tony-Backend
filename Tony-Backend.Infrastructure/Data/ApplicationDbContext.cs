@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Tony_Backend.Shared.Entities;
-using GeoCoordinatePortable;
 
 namespace Tony_Backend.API.Data
 {
