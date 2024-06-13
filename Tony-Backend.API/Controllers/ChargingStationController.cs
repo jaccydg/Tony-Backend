@@ -52,7 +52,9 @@ namespace Tony_Backend.API.Controllers
             var chargingStation = new ChargingStation
             {
                 Number = number,
-                GatewayId = gatewayId
+                GatewayId = gatewayId,
+                UserConnectedId = userConnectedId,
+                LastLogId = lastLogId
             };
             _context.ChargingStations.Add(chargingStation);
             await _context.SaveChangesAsync();
