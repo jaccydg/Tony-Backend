@@ -12,7 +12,8 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
 {
     public class DeleteChargingStationCommand : IRequest<bool>
     {
-        public required int Id { get; init; }
+        public required int Number { get; init; }
+        public required int GatewayId { get; init; }
     }
 
     internal class DeleteChargingStationCommandHandler : IRequestHandler<DeleteChargingStationCommand, bool>
@@ -25,7 +26,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
 
         public async Task<bool> Handle(DeleteChargingStationCommand request, CancellationToken cancellationToken)
         {
-            var chargingStation = await _context.ChargingStations.FindAsync(request.Id);
+            var chargingStation = await _context.ChargingStations.FindAsync(request.Number, request.GatewayId);
 
             if (chargingStation == null)
             {

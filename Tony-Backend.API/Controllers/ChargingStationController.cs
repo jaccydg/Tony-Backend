@@ -66,25 +66,13 @@ namespace Tony_Backend.API.Controllers
                 return BadRequest("At least one parameter (userConnectedId, lastLogId) must be provided for update.");
             }
 
-            var chargingStation = await _context.ChargingStations.FindAsync(number, gatewayId);
+            var chargingStation = await _sender.Send(new UpdateChargingStationCommand() { Number = number, GatewayId = gatewayId, UserConnectedId = userConnectedId, LastLogId = lastLogId });
             if (chargingStation == null)
             {
                 return NotFound();
             }
 
-            // Update properties if provided values are not null or empty
-            if (userConnectedId != null)
-            {
-                chargingStation.UserConnectedId = userConnectedId;
-            }
-            if (lastLogId != null)
-            {
-                chargingStation.LastLogId = lastLogId;
-            }
-
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            return Ok(chargingStation);
         }
 
         [HttpDelete(nameof(DeleteChargingStation))]
@@ -97,7 +85,7 @@ namespace Tony_Backend.API.Controllers
             }
 
             //_context.ChargingStations.Remove(chargingStation);
-            //await _context.SaveChangesAsync();
+            await _sender.Send(new DeleteChargingStationCommand() { Number = number, GatewayId = gatewayId });
 
             return Ok();
         }
