@@ -8,6 +8,7 @@ using Tony_Backend.API.Data;
 using Tony_Backend.Shared.Entities;
 using Tony_Backend.API.Migrations;
 using Tony_Backend.Application.Commands.GatewayCommands;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Tony_Backend.API.Controllers
 {
@@ -28,7 +29,14 @@ namespace Tony_Backend.API.Controllers
         [HttpGet(nameof(GetAllGateways))]
         public async Task<ActionResult<IEnumerable<Gateway>>> GetAllGateways()
         {
-            return await _context.Gateways.ToListAsync();
+            var gateways = await _sender.Send(new GetAllGatewaysCommand());
+
+            if (gateways == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(gateways);
         }
 
         [HttpGet(nameof(GetGatewayById))]
@@ -40,73 +48,52 @@ namespace Tony_Backend.API.Controllers
             {
                 return NotFound();
             }
+
             return Ok(gateway);
         }
 
-        [HttpPost(nameof(Create))]
-        public async Task<IActionResult> Create(string? name, double? latitude, double? longitude)
+        [HttpPost(nameof(CreateGateway))]
+        public async Task<IActionResult> CreateGateway(string? name, double? latitude, double? longitude)
         {
             if (string.IsNullOrEmpty(name) || latitude == null || longitude == null)
             {
                 return BadRequest("Every parameter (name, latitude, longitude) must be provided.");
             }
 
-            var gateway = new Gateway
-            {
-                Name = name,
-                Latitude = latitude,
-                Longitude = longitude
-            };
-            _context.Gateways.Add(gateway);
-            await _context.SaveChangesAsync();
+            var gateway = await _sender.Send(new CreateGatewayCommand() { Name = name, Latitude = latitude, Longitude = longitude });
 
             return Ok(gateway);
         }
 
-        [HttpPut(nameof(Update))]
-        public async Task<IActionResult> Update(int id, string? name, double? longitude, double? latitude)
+        [HttpPut(nameof(UpdateGateway))]
+        public async Task<IActionResult> UpdateGateway(int id, string? name, double? longitude, double? latitude)
         {
             if (string.IsNullOrEmpty(name) && latitude == null && longitude == null)
             {
                 return BadRequest("At least one parameter (name, latitude, longitude) must be provided for update.");
             }
 
-            var gateway = await _context.Gateways.FindAsync(id);
+            var gateway = await _sender.Send(new UpdateGatewayCommand() { Id = id, Name = name, Latitude = latitude, Longitude = longitude });
+            
             if (gateway == null)
             {
                 return NotFound();
             }
-
-            // Update properties if provided values are not null or empty
-            if (!string.IsNullOrEmpty(name))
-            {
-                gateway.Name = name;
-            }
-            if (latitude != null)
-            {
-                gateway.Latitude = latitude;
-            }
-            if (longitude != null)
-            {
-                gateway.Longitude = longitude;
-            }
-
-            await _context.SaveChangesAsync();
-
-            return Ok();
+            
+            return Ok(gateway);
         }
 
-        [HttpDelete(nameof(Delete))]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete(nameof(DeleteGateway))]
+        public async Task<IActionResult> DeleteGateway(int id)
         {
-            var gateway = await _context.Gateways.FindAsync(id);
-            if (gateway == null)
+            // TODO: 
+            // questo è un accrocchio, sarebbe bello usare la gestione degli errori
+
+            var found = await _sender.Send(new DeleteGatewayCommand() { Id = id });
+            if (!found)
             {
                 return NotFound();
             }
-
-            _context.Gateways.Remove(gateway);
-            await _context.SaveChangesAsync();
 
             return Ok();
         }

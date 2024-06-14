@@ -31,9 +31,10 @@ namespace Tony_Backend.API.Data
 
             // SEED DATA
             modelBuilder.Entity<Gateway>().HasData(
-                new Gateway { Id = 1, Name = "Gateway 1", Latitude = 48.8566, Longitude = 2.3522 },
-                new Gateway { Id = 2, Name = "Gateway 2", Latitude = 48.8566, Longitude = 2.3512 },
-                new Gateway { Id = 3, Name = "Gateway 3", Latitude = 48.8566, Longitude = 2.3589 });
+                new Gateway { Id = 1, Name = "Consorzio Universitario", Latitude = 45.951543, Longitude = 12.680627 },
+                new Gateway { Id = 2, Name = "Aldi - Pordenone", Latitude = 45.953619, Longitude = 12.687382 },
+                new Gateway { Id = 3, Name = "Naonis Gym", Latitude = 45.953282, Longitude = 12.672556 },
+                new Gateway { Id = 3, Name = "Poste Italiane", Latitude = 45.951200, Longitude = 12.675172 });
 
             modelBuilder.Entity<ChargingStation>().HasData(
                 new ChargingStation { Number = 1, GatewayId = 1 },

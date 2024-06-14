@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using Tony_Backend.API.Data;
 using Tony_Backend.Shared.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Tony_Backend.Application.Commands.ChargingStationCommands;
 
 
 namespace Tony_Backend.API.Controllers
@@ -17,54 +18,48 @@ namespace Tony_Backend.API.Controllers
     public class ChargingStationController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly ISender _sender;
 
-        public ChargingStationController(ApplicationDbContext context)
+        public ChargingStationController(ApplicationDbContext context, ISender sender)
         {
             _context = context;
+            _sender = sender;
         }
 
         [HttpGet(nameof(GetAllChargingStation))]
         public async Task<ActionResult<IEnumerable<ChargingStation>>> GetAllChargingStation()
         {
-            return await _context.ChargingStations.ToListAsync();
+            //return await _context.ChargingStations.ToListAsync();
+            return Ok(await _sender.Send(new GetAllChargingStationCommand()));
         }
 
         [HttpGet(nameof(GetChargingStationById))]
         public async Task<ActionResult<ChargingStation>> GetChargingStationById(int number, int gatewayId)
         {
-            var chargingStation = await _context.ChargingStations.FindAsync(number, gatewayId);
+            var chargingStation = await _sender.Send(new GetChargingStationByIdCommand() { Number = number, GatewayId = gatewayId});
             if (chargingStation == null)
             {
                 return NotFound();
             }
-
-            return chargingStation;
+            return Ok(chargingStation);
         }
 
-        [HttpPost(nameof(Create))]
-        public async Task<IActionResult> Create(int number, int gatewayId, int? userConnectedId, int? lastLogId)
+        [HttpPost(nameof(CreateChargingStation))]
+        public async Task<IActionResult> CreateChargingStation(int number, int gatewayId, int? userConnectedId, int? lastLogId)
         {
             if (userConnectedId == null || lastLogId == null)
             {
                 return BadRequest("At least one parameter (userConnectedId, lastLogId) must be provided.");
             }
 
-            var chargingStation = new ChargingStation
-            {
-                Number = number,
-                GatewayId = gatewayId,
-                UserConnectedId = userConnectedId,
-                LastLogId = lastLogId
-            };
-            _context.ChargingStations.Add(chargingStation);
-            await _context.SaveChangesAsync();
+            var chargingStation = await _sender.Send(new CreateChargingStationCommand() { Number = number, GatewayId = gatewayId, UserConnectedId = userConnectedId, LastLogId = lastLogId });
 
             return Ok(chargingStation);
         }
 
 
-        [HttpPut(nameof(Update))]
-        public async Task<IActionResult> Update(int number, int gatewayId, int? userConnectedId, int? lastLogId)
+        [HttpPut(nameof(UpdateChargingStation))]
+        public async Task<IActionResult> UpdateChargingStation(int number, int gatewayId, int? userConnectedId, int? lastLogId)
         {
             if (userConnectedId == null || lastLogId == null)
             {
@@ -92,8 +87,8 @@ namespace Tony_Backend.API.Controllers
             return Ok();
         }
 
-        [HttpDelete(nameof(Delete))]
-        public async Task<IActionResult> Delete(int number, int gatewayId)
+        [HttpDelete(nameof(DeleteChargingStation))]
+        public async Task<IActionResult> DeleteChargingStation(int number, int gatewayId)
         {
             var chargingStation = await _context.ChargingStations.FindAsync(number, gatewayId);
             if (chargingStation == null)
@@ -101,8 +96,8 @@ namespace Tony_Backend.API.Controllers
                 return NotFound();
             }
 
-            _context.ChargingStations.Remove(chargingStation);
-            await _context.SaveChangesAsync();
+            //_context.ChargingStations.Remove(chargingStation);
+            //await _context.SaveChangesAsync();
 
             return Ok();
         }
