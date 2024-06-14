@@ -18,6 +18,10 @@ namespace Tony_Backend.Application.Commands.GatewayCommands
     internal class GetGatewayByIdCommandHandler : IRequestHandler<GetGatewayByIdCommand, Gateway>
     {
         private readonly ApplicationDbContext _context;
+        public GetGatewayByIdCommandHandler(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         public async Task<Gateway> Handle(GetGatewayByIdCommand request, CancellationToken cancellationToken)
         {

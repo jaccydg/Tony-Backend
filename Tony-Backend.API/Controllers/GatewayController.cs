@@ -9,7 +9,6 @@ using Tony_Backend.Shared.Entities;
 using Tony_Backend.API.Migrations;
 using Tony_Backend.Application.Commands.GatewayCommands;
 
-
 namespace Tony_Backend.API.Controllers
 {
     //[Authorize(Roles = "Administrator")]
@@ -35,7 +34,7 @@ namespace Tony_Backend.API.Controllers
         [HttpGet(nameof(GetGatewayById))]
         public async Task<ActionResult<Gateway>> GetGatewayById(int id)
         {
-            var gateway = await _context.Gateways.FindAsync(id);
+            var gateway = await _sender.Send(new GetGatewayByIdCommand() { Id = id });
 
             if (gateway == null)
             {
