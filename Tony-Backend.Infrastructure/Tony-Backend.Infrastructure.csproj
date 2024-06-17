@@ -37,4 +37,8 @@
     <ProjectReference Include="..\Tony-Backend.Shared\Tony-Backend.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\RelationalDbOperations\" />
+  </ItemGroup>
+
 </Project>
