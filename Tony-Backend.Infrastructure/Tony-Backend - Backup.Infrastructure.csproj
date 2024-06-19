@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <Folder Include="Services\RelationalDbOperations\" />
   </ItemGroup>
 
 </Project>
