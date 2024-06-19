@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Tony_Backend.Application.Commands.ChargingStationCommands
 {
-    public class UpdateChargingStationCommand : IRequest<ChargingStation>
+    public class EditChargingStationCommand : IRequest<ChargingStation>
     {
         public required int Number { get; init; }
         public required int GatewayId { get; init; }
@@ -19,7 +19,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
         public required int? LastLogId { get; init; }
     }
 
-    internal class UpdateChargingStationCommandHandler : IRequestHandler<UpdateChargingStationCommand, ChargingStation>
+    internal class UpdateChargingStationCommandHandler : IRequestHandler<EditChargingStationCommand, ChargingStation>
     {
         private readonly ApplicationDbContext _context;
         public UpdateChargingStationCommandHandler(ApplicationDbContext context)
@@ -27,7 +27,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
             _context = context;
         }
 
-        public async Task<ChargingStation> Handle(UpdateChargingStationCommand request, CancellationToken cancellationToken)
+        public async Task<ChargingStation> Handle(EditChargingStationCommand request, CancellationToken cancellationToken)
         {
             var chargingStation = await _context.ChargingStations.FindAsync(request.Number, request.GatewayId);
 

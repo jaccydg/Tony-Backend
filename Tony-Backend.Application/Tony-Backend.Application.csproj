@@ -8,17 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Commands\ChardingStationCommands\GetChardingStationCommands.cs" />
-    <Compile Remove="Commands\ChardingStationCommands\GetChargingStationById.cs" />
-    <Compile Remove="Commands\ChardingStationCommands\GetGatewayByIdCommand - Copy %282%29.cs" />
-    <Compile Remove="Commands\ChardingStationCommands\GetGatewayByIdCommand - Copy %283%29.cs" />
-    <Compile Remove="Commands\ChardingStationCommands\GetGatewayByIdCommand - Copy %284%29.cs" />
-    <Compile Remove="Commands\ChardingStationCommands\GetGatewayByIdCommand - Copy.cs" />
+    <Compile Remove="Commands\ChargingStationCommands\GetChardingStationCommands.cs" />
+    <Compile Remove="Commands\ChargingStationCommands\GetChargingStationById.cs" />
+    <Compile Remove="Commands\ChargingStationCommands\GetGatewayByIdCommand - Copy %282%29.cs" />
+    <Compile Remove="Commands\ChargingStationCommands\GetGatewayByIdCommand - Copy %283%29.cs" />
+    <Compile Remove="Commands\ChargingStationCommands\GetGatewayByIdCommand - Copy %284%29.cs" />
+    <Compile Remove="Commands\ChargingStationCommands\GetGatewayByIdCommand - Copy.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Commands\ChardingStationCommands\CreateChargingStationCommand" />
-    <None Remove="Commands\ChardingStationCommands\NewFile1.txt" />
+    <None Remove="Commands\ChargingStationCommands\CreateChargingStationCommand" />
+    <None Remove="Commands\ChargingStationCommands\NewFile1.txt" />
   </ItemGroup>
 
   <ItemGroup>

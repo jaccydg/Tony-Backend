@@ -13,11 +13,11 @@ using Tony_Backend.Application.Commands.UserCommands;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController : ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly ISender _sender;
 
-    public UserController(ISender sender)
+    public UsersController(ISender sender)
     {
         _sender = sender;
     }

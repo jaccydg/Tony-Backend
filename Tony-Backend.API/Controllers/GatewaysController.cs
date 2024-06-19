@@ -15,19 +15,19 @@ namespace Tony_Backend.API.Controllers
     //[Authorize(Roles = "Administrator")]
     [ApiController]
     [Route("[controller]")]
-    public class GatewayController : ControllerBase
+    public class GatewaysController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
         private readonly ISender _sender;
 
-        public GatewayController(ApplicationDbContext context, ISender sender)
+        public GatewaysController(ApplicationDbContext context, ISender sender)
         {
             _context = context;
             _sender = sender;
         }
 
-        [HttpGet(nameof(GetAllGateways))]
-        public async Task<ActionResult<IEnumerable<Gateway>>> GetAllGateways()
+        [HttpGet("")]
+        public async Task<ActionResult<IEnumerable<Gateway>>> GetAll()
         {
             var gateways = await _sender.Send(new GetAllGatewaysCommand());
 
@@ -39,8 +39,8 @@ namespace Tony_Backend.API.Controllers
             return Ok(gateways);
         }
 
-        [HttpGet(nameof(GetGatewayById))]
-        public async Task<ActionResult<Gateway>> GetGatewayById(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Gateway>> GetById(int id)
         {
             var gateway = await _sender.Send(new GetGatewayByIdCommand() { Id = id });
 
@@ -52,8 +52,8 @@ namespace Tony_Backend.API.Controllers
             return Ok(gateway);
         }
 
-        [HttpPost(nameof(CreateGateway))]
-        public async Task<IActionResult> CreateGateway(string? name, double? latitude, double? longitude)
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create(string? name, double? latitude, double? longitude)
         {
             if (string.IsNullOrEmpty(name) || latitude == null || longitude == null)
             {
@@ -65,8 +65,8 @@ namespace Tony_Backend.API.Controllers
             return Ok(gateway);
         }
 
-        [HttpPut(nameof(UpdateGateway))]
-        public async Task<IActionResult> UpdateGateway(int id, string? name, double? longitude, double? latitude)
+        [HttpPut("{id}/Update")]
+        public async Task<IActionResult> Update(int id, string? name, double? longitude, double? latitude)
         {
             if (string.IsNullOrEmpty(name) && latitude == null && longitude == null)
             {
@@ -83,8 +83,8 @@ namespace Tony_Backend.API.Controllers
             return Ok(gateway);
         }
 
-        [HttpDelete(nameof(DeleteGateway))]
-        public async Task<IActionResult> DeleteGateway(int id)
+        [HttpDelete("{id}/Delete")]
+        public async Task<IActionResult> Delete(int id)
         {
             // TODO: 
             // questo è un accrocchio, sarebbe bello usare la gestione degli errori
