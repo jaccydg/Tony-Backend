@@ -226,10 +226,14 @@ namespace Tony_Backend.API.Migrations
                     b.Property<int>("GatewayId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("LastLogId")
+                    b.Property<int?>("LastLogId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UserConnectedId")
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("UserConnectedId")
                         .HasColumnType("integer");
 
                     b.HasKey("Number", "GatewayId");
@@ -243,64 +247,55 @@ namespace Tony_Backend.API.Migrations
                         {
                             Number = 1,
                             GatewayId = 1,
-                            LastLogId = 0,
-                            UserConnectedId = 0
+                            Status = "Vacant"
                         },
                         new
                         {
                             Number = 2,
                             GatewayId = 1,
-                            LastLogId = 0,
-                            UserConnectedId = 0
+                            Status = "Vacant"
                         },
                         new
                         {
                             Number = 1,
                             GatewayId = 2,
-                            LastLogId = 0,
-                            UserConnectedId = 0
+                            Status = "Vacant"
                         },
                         new
                         {
                             Number = 2,
                             GatewayId = 2,
-                            LastLogId = 0,
-                            UserConnectedId = 0
+                            Status = "Vacant"
                         },
                         new
                         {
                             Number = 3,
                             GatewayId = 2,
-                            LastLogId = 0,
-                            UserConnectedId = 0
+                            Status = "Vacant"
                         },
                         new
                         {
                             Number = 1,
                             GatewayId = 3,
-                            LastLogId = 0,
-                            UserConnectedId = 0
+                            Status = "Vacant"
                         },
                         new
                         {
                             Number = 2,
                             GatewayId = 3,
-                            LastLogId = 0,
-                            UserConnectedId = 0
+                            Status = "Vacant"
                         },
                         new
                         {
                             Number = 3,
                             GatewayId = 3,
-                            LastLogId = 0,
-                            UserConnectedId = 0
+                            Status = "Vacant"
                         },
                         new
                         {
                             Number = 4,
                             GatewayId = 3,
-                            LastLogId = 0,
-                            UserConnectedId = 0
+                            Status = "Vacant"
                         });
                 });
 
@@ -312,14 +307,13 @@ namespace Tony_Backend.API.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("Latitude")
+                    b.Property<double?>("Latitude")
                         .HasColumnType("double precision");
 
-                    b.Property<double>("Longitude")
+                    b.Property<double?>("Longitude")
                         .HasColumnType("double precision");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -330,23 +324,30 @@ namespace Tony_Backend.API.Migrations
                         new
                         {
                             Id = 1,
-                            Latitude = 48.8566,
-                            Longitude = 2.3521999999999998,
-                            Name = "Gateway 1"
+                            Latitude = 45.951543000000001,
+                            Longitude = 12.680626999999999,
+                            Name = "Consorzio Universitario"
                         },
                         new
                         {
                             Id = 2,
-                            Latitude = 48.8566,
-                            Longitude = 2.3512,
-                            Name = "Gateway 2"
+                            Latitude = 45.953619000000003,
+                            Longitude = 12.687381999999999,
+                            Name = "Aldi - Pordenone"
                         },
                         new
                         {
                             Id = 3,
-                            Latitude = 48.8566,
-                            Longitude = 2.3589000000000002,
-                            Name = "Gateway 3"
+                            Latitude = 45.953282000000002,
+                            Longitude = 12.672556,
+                            Name = "Naonis Gym"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Latitude = 45.9512,
+                            Longitude = 12.675172,
+                            Name = "Poste Italiane"
                         });
                 });
 

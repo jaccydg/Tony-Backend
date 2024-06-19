@@ -15,6 +15,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
     {
         public required int Number { get; init; }
         public required int GatewayId { get; init; }
+        public required ChargingStationStatus Status { get; init; }
         public required int? UserConnectedId { get; init; }
         public required int? LastLogId { get; init; }
     }

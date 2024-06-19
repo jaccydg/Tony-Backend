@@ -16,17 +16,27 @@ namespace Tony_Backend.API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<ChargingStation>(entity =>
+            {
+                // Define composite primary key
+                entity
+                    .HasKey(cs => new { cs.Number, cs.GatewayId });
 
-            // Define composite primary key
-            modelBuilder.Entity<ChargingStation>()
-                .HasKey(cs => new { cs.Number, cs.GatewayId });
+                // Define relation between ChargingStation and Gateway
+                entity
+                    .HasOne(c => c.Gateway)
+                    .WithMany(g => g.ChargingStations)
+                    .HasForeignKey(c => c.GatewayId)
+                    .OnDelete(DeleteBehavior.Cascade);
 
-            // Define relation between ChargingStation and Gateway
-            modelBuilder.Entity<ChargingStation>()
-                .HasOne(c => c.Gateway)
-                .WithMany(g => g.ChargingStations)
-                .HasForeignKey(c => c.GatewayId)
-                .OnDelete(DeleteBehavior.Cascade);
+                // Define Status required
+                entity.Property(b => b.Status)
+                    .IsRequired()
+                    .HasConversion(
+                        v => v.ToString(),
+                        v => (ChargingStationStatus)Enum.Parse(typeof(ChargingStationStatus), v));
+            });
 
 
             // SEED DATA
@@ -37,15 +47,15 @@ namespace Tony_Backend.API.Data
                 new Gateway { Id = 4, Name = "Poste Italiane", Latitude = 45.951200, Longitude = 12.675172 });
 
             modelBuilder.Entity<ChargingStation>().HasData(
-                new ChargingStation { Number = 1, GatewayId = 1 },
-                new ChargingStation { Number = 2, GatewayId = 1 },
-                new ChargingStation { Number = 1, GatewayId = 2 },
-                new ChargingStation { Number = 2, GatewayId = 2 },
-                new ChargingStation { Number = 3, GatewayId = 2 },
-                new ChargingStation { Number = 1, GatewayId = 3 },
-                new ChargingStation { Number = 2, GatewayId = 3 },
-                new ChargingStation { Number = 3, GatewayId = 3 },
-                new ChargingStation { Number = 4, GatewayId = 3 });
+                new ChargingStation { Number = 1, GatewayId = 1, Status = ChargingStationStatus.Vacant },
+                new ChargingStation { Number = 2, GatewayId = 1, Status = ChargingStationStatus.Vacant },
+                new ChargingStation { Number = 1, GatewayId = 2, Status = ChargingStationStatus.Vacant },
+                new ChargingStation { Number = 2, GatewayId = 2, Status = ChargingStationStatus.Vacant },
+                new ChargingStation { Number = 3, GatewayId = 2, Status = ChargingStationStatus.Vacant },
+                new ChargingStation { Number = 1, GatewayId = 3, Status = ChargingStationStatus.Vacant },
+                new ChargingStation { Number = 2, GatewayId = 3, Status = ChargingStationStatus.Vacant },
+                new ChargingStation { Number = 3, GatewayId = 3, Status = ChargingStationStatus.Vacant },
+                new ChargingStation { Number = 4, GatewayId = 3, Status = ChargingStationStatus.Vacant });
         }
 
     }

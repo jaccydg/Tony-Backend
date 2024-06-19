@@ -22,8 +22,8 @@ public class UsersController : ControllerBase
         _sender = sender;
     }
 
-    [HttpGet(nameof(GetAllUsers))]
-    public async Task<ActionResult<IEnumerable<IdentityUser>>> GetAllUsers()
+    [HttpGet("")]
+    public async Task<ActionResult<IEnumerable<IdentityUser>>> GetAll()
     {
         return Ok(await _sender.Send(new GetAllUsersCommand()));
     }

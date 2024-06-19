@@ -19,9 +19,9 @@ namespace Tony_Backend.API.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Longitude = table.Column<double>(type: "double precision", nullable: false),
-                    Latitude = table.Column<double>(type: "double precision", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Longitude = table.Column<double>(type: "double precision", nullable: true),
+                    Latitude = table.Column<double>(type: "double precision", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -34,8 +34,9 @@ namespace Tony_Backend.API.Migrations
                 {
                     Number = table.Column<int>(type: "integer", nullable: false),
                     GatewayId = table.Column<int>(type: "integer", nullable: false),
-                    UserConnectedId = table.Column<int>(type: "integer", nullable: false),
-                    LastLogId = table.Column<int>(type: "integer", nullable: false)
+                    Status = table.Column<string>(type: "text", nullable: false),
+                    UserConnectedId = table.Column<int>(type: "integer", nullable: true),
+                    LastLogId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -53,25 +54,26 @@ namespace Tony_Backend.API.Migrations
                 columns: new[] { "Id", "Latitude", "Longitude", "Name" },
                 values: new object[,]
                 {
-                    { 1, 48.8566, 2.3521999999999998, "Gateway 1" },
-                    { 2, 48.8566, 2.3512, "Gateway 2" },
-                    { 3, 48.8566, 2.3589000000000002, "Gateway 3" }
+                    { 1, 45.951543000000001, 12.680626999999999, "Consorzio Universitario" },
+                    { 2, 45.953619000000003, 12.687381999999999, "Aldi - Pordenone" },
+                    { 3, 45.953282000000002, 12.672556, "Naonis Gym" },
+                    { 4, 45.9512, 12.675172, "Poste Italiane" }
                 });
 
             migrationBuilder.InsertData(
                 table: "ChargingStations",
-                columns: new[] { "GatewayId", "Number", "LastLogId", "UserConnectedId" },
+                columns: new[] { "GatewayId", "Number", "LastLogId", "Status", "UserConnectedId" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, 0 },
-                    { 2, 1, 0, 0 },
-                    { 3, 1, 0, 0 },
-                    { 1, 2, 0, 0 },
-                    { 2, 2, 0, 0 },
-                    { 3, 2, 0, 0 },
-                    { 2, 3, 0, 0 },
-                    { 3, 3, 0, 0 },
-                    { 3, 4, 0, 0 }
+                    { 1, 1, null, "Vacant", null },
+                    { 2, 1, null, "Vacant", null },
+                    { 3, 1, null, "Vacant", null },
+                    { 1, 2, null, "Vacant", null },
+                    { 2, 2, null, "Vacant", null },
+                    { 3, 2, null, "Vacant", null },
+                    { 2, 3, null, "Vacant", null },
+                    { 3, 3, null, "Vacant", null },
+                    { 3, 4, null, "Vacant", null }
                 });
 
             migrationBuilder.CreateIndex(

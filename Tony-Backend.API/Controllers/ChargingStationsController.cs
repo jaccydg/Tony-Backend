@@ -45,28 +45,28 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(int number, int gatewayId, int? userConnectedId, int? lastLogId)
+        public async Task<IActionResult> Create(int number, int gatewayId, ChargingStationStatus status, int? userConnectedId, int? lastLogId)
         {
             if (userConnectedId == null || lastLogId == null)
             {
                 return BadRequest("At least one parameter (userConnectedId, lastLogId) must be provided.");
             }
 
-            var chargingStation = await _sender.Send(new CreateChargingStationCommand() { Number = number, GatewayId = gatewayId, UserConnectedId = userConnectedId, LastLogId = lastLogId });
+            var chargingStation = await _sender.Send(new CreateChargingStationCommand() { Number = number, GatewayId = gatewayId, Status = status, UserConnectedId = userConnectedId, LastLogId = lastLogId });
 
             return Ok(chargingStation);
         }
 
 
         [HttpPut("{gatewayId}/{number}/Edit")]
-        public async Task<IActionResult> Edit(int number, int gatewayId, int? userConnectedId, int? lastLogId)
+        public async Task<IActionResult> Edit(int number, int gatewayId, ChargingStationStatus status, int? userConnectedId, int? lastLogId)
         {
             if (userConnectedId == null || lastLogId == null)
             {
                 return BadRequest("At least one parameter (userConnectedId, lastLogId) must be provided for edit.");
             }
 
-            var chargingStation = await _sender.Send(new EditChargingStationCommand() { Number = number, GatewayId = gatewayId, UserConnectedId = userConnectedId, LastLogId = lastLogId });
+            var chargingStation = await _sender.Send(new EditChargingStationCommand() { Number = number, GatewayId = gatewayId, Status = status, UserConnectedId = userConnectedId, LastLogId = lastLogId });
             if (chargingStation == null)
             {
                 return NotFound();
@@ -88,6 +88,17 @@ namespace Tony_Backend.API.Controllers
             await _sender.Send(new DeleteChargingStationCommand() { Number = number, GatewayId = gatewayId });
 
             return Ok();
+        }
+
+        [HttpGet("{tewayId}/{number}/Check")]
+        public async Task<ActionResult<ChargingStation>> Check([FromRoute] int number, [FromRoute] int gatewayId)
+        {
+            var chargingStation = await _sender.Send(new CheckChargingStationCommand() { Number = number, GatewayId = gatewayId });
+            if (chargingStation == null)
+            {
+                return NotFound();
+            }
+            return Ok(chargingStation);
         }
     }
 }
