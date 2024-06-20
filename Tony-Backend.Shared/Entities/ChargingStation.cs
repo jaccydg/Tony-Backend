@@ -10,7 +10,7 @@ namespace Tony_Backend.Shared.Entities
     {
         public int Number { get; set; }
         public int GatewayId { get; set; }
-        public ChargingStationStatus Status { get; set; }
+        public ChargingStationStatus? Status { get; set; }
         public int? UserConnectedId { get; set; }
         public int? LastLogId { get; set; }
 

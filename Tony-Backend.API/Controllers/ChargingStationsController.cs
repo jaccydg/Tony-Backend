@@ -59,11 +59,11 @@ namespace Tony_Backend.API.Controllers
 
 
         [HttpPut("{gatewayId}/{number}/Edit")]
-        public async Task<IActionResult> Edit(int number, int gatewayId, ChargingStationStatus status, int? userConnectedId, int? lastLogId)
+        public async Task<IActionResult> Edit(int number, int gatewayId, ChargingStationStatus? status, int? userConnectedId, int? lastLogId)
         {
-            if (userConnectedId == null || lastLogId == null)
+            if (status == null && userConnectedId == null && lastLogId == null)
             {
-                return BadRequest("At least one parameter (userConnectedId, lastLogId) must be provided for edit.");
+                return BadRequest("At least one parameter (status, userConnectedId, lastLogId) must be provided for edit.");
             }
 
             var chargingStation = await _sender.Send(new EditChargingStationCommand() { Number = number, GatewayId = gatewayId, Status = status, UserConnectedId = userConnectedId, LastLogId = lastLogId });
@@ -78,19 +78,18 @@ namespace Tony_Backend.API.Controllers
         [HttpDelete("{gatewayId}/{number}/Delete")]
         public async Task<IActionResult> Delete(int number, int gatewayId)
         {
-            var chargingStation = await _context.ChargingStations.FindAsync(number, gatewayId);
+            var chargingStation = await _context.ChargingStations.FindAsync(number, gatewayId); 
             if (chargingStation == null)
             {
                 return NotFound();
             }
 
-            //_context.ChargingStations.Remove(chargingStation);
             await _sender.Send(new DeleteChargingStationCommand() { Number = number, GatewayId = gatewayId });
 
             return Ok();
         }
 
-        [HttpGet("{tewayId}/{number}/Check")]
+        [HttpGet("{gatewayId}/{number}/Check")]
         public async Task<ActionResult<ChargingStation>> Check([FromRoute] int number, [FromRoute] int gatewayId)
         {
             var chargingStation = await _sender.Send(new CheckChargingStationCommand() { Number = number, GatewayId = gatewayId });

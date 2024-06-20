@@ -36,6 +36,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
             {
                 Number = request.Number,
                 GatewayId = request.GatewayId,
+                Status = request.Status,
                 UserConnectedId = request.UserConnectedId,
                 LastLogId = request.LastLogId
             };

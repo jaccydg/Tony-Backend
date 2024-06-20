@@ -15,7 +15,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
     {
         public required int Number { get; init; }
         public required int GatewayId { get; init; }
-        public required ChargingStationStatus Status { get; init; }
+        public required ChargingStationStatus? Status { get; init; }
         public required int? UserConnectedId { get; init; }
         public required int? LastLogId { get; init; }
     }
@@ -38,6 +38,10 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
             }
 
             // Update properties if provided values are not null or empty
+            if (request.Status != null)
+            {
+                chargingStation.Status = request.Status;
+            }
             if (request.UserConnectedId != null)
             {
                 chargingStation.UserConnectedId = request.UserConnectedId;
@@ -48,8 +52,9 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
                 chargingStation.LastLogId = request.LastLogId;
             }
 
-            return chargingStation;
+            await _context.SaveChangesAsync();
 
+            return chargingStation;
         }
     }
 }
