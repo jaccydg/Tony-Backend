@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Tony_Backend.API.Data;
 using Tony_Backend.Shared.Entities;
 
-namespace Tony_Backend.Application.Commands.UserCommands
+namespace Tony_Backend.Application.Commands.UserCommands.CRUD
 {
     public class GetAllUsersCommand : IRequest<IEnumerable<IdentityUser>> { }
 

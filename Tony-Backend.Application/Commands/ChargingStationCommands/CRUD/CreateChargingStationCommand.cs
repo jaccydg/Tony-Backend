@@ -10,13 +10,13 @@ using Tony_Backend.Shared.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Tony_Backend.Application.Commands.ChargingStationCommands
+namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
 {
     public class CreateChargingStationCommand : IRequest<ChargingStation>
     {
         public required int Number { get; init; }
         public required int GatewayId { get; init; }
-        public required ChargingStationStatus Status {get; init; }
+        public required ChargingStationStatus Status { get; init; }
         public required int? UserConnectedId { get; init; }
         public required int? LastLogId { get; init; }
     }

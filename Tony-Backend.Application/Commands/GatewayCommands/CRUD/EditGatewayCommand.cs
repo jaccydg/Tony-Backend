@@ -9,7 +9,7 @@ using System.Xml.Linq;
 using Tony_Backend.API.Data;
 using Tony_Backend.Shared.Entities;
 
-namespace Tony_Backend.Application.Commands.GatewayCommands
+namespace Tony_Backend.Application.Commands.GatewayCommands.CRUD
 {
     public class EditGatewayCommand : IRequest<Gateway>
     {

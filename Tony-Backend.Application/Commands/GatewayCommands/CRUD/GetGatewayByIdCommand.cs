@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Tony_Backend.API.Data;
 using Tony_Backend.Shared.Entities;
 
-namespace Tony_Backend.Application.Commands.GatewayCommands
+namespace Tony_Backend.Application.Commands.GatewayCommands.CRUD
 {
     public class GetGatewayByIdCommand : IRequest<Gateway>
     {
@@ -25,7 +25,7 @@ namespace Tony_Backend.Application.Commands.GatewayCommands
 
         public async Task<Gateway> Handle(GetGatewayByIdCommand request, CancellationToken cancellationToken)
         {
-            return await _context.Gateways.FindAsync(request.Id); 
+            return await _context.Gateways.FindAsync(request.Id);
         }
     }
 }

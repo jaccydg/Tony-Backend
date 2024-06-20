@@ -9,7 +9,7 @@ using Tony_Backend.API.Data;
 using Tony_Backend.Shared.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Tony_Backend.Application.Commands.ChargingStationCommands
+namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
 {
     public class GetChargingStationByIdCommand : IRequest<ChargingStation>
     {

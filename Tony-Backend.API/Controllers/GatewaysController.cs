@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 using Tony_Backend.API.Data;
 using Tony_Backend.Shared.Entities;
 using Tony_Backend.API.Migrations;
-using Tony_Backend.Application.Commands.GatewayCommands;
+using Tony_Backend.Application.Commands.GatewayCommands.CRUD;
 using System.Reflection.Metadata.Ecma335;
 
 namespace Tony_Backend.API.Controllers

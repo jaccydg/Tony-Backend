@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Tony_Backend.API.Data;
 using Tony_Backend.Shared.Entities;
 
-namespace Tony_Backend.Application.Commands.ChargingStationCommands
+namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
 {
     public class DeleteChargingStationCommand : IRequest<bool>
     {

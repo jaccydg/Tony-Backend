@@ -9,7 +9,7 @@ using Tony_Backend.API.Data;
 using Tony_Backend.Shared.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Security.Claims;
-using Tony_Backend.Application.Commands.UserCommands;
+using Tony_Backend.Application.Commands.UserCommands.CRUD;
 
 [ApiController]
 [Route("[controller]")]
