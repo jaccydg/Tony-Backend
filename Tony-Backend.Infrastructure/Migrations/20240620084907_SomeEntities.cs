@@ -65,15 +65,15 @@ namespace Tony_Backend.API.Migrations
                 columns: new[] { "GatewayId", "Number", "LastLogId", "Status", "UserConnectedId" },
                 values: new object[,]
                 {
-                    { 1, 1, null, "Vacant", null },
-                    { 2, 1, null, "Vacant", null },
-                    { 3, 1, null, "Vacant", null },
-                    { 1, 2, null, "Vacant", null },
-                    { 2, 2, null, "Vacant", null },
-                    { 3, 2, null, "Vacant", null },
-                    { 2, 3, null, "Vacant", null },
-                    { 3, 3, null, "Vacant", null },
-                    { 3, 4, null, "Vacant", null }
+                    { 1, 1, null, "Free", null },
+                    { 2, 1, null, "Free", null },
+                    { 3, 1, null, "Free", null },
+                    { 1, 2, null, "Free", null },
+                    { 2, 2, null, "Free", null },
+                    { 3, 2, null, "Free", null },
+                    { 2, 3, null, "Free", null },
+                    { 3, 3, null, "Free", null },
+                    { 3, 4, null, "Free", null }
                 });
 
             migrationBuilder.CreateIndex(

@@ -12,7 +12,7 @@ using Tony_Backend.API.Data;
 namespace Tony_Backend.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240619154127_SomeEntities")]
+    [Migration("20240620084907_SomeEntities")]
     partial class SomeEntities
     {
         /// <inheritdoc />
@@ -250,55 +250,55 @@ namespace Tony_Backend.API.Migrations
                         {
                             Number = 1,
                             GatewayId = 1,
-                            Status = "Vacant"
+                            Status = "Free"
                         },
                         new
                         {
                             Number = 2,
                             GatewayId = 1,
-                            Status = "Vacant"
+                            Status = "Free"
                         },
                         new
                         {
                             Number = 1,
                             GatewayId = 2,
-                            Status = "Vacant"
+                            Status = "Free"
                         },
                         new
                         {
                             Number = 2,
                             GatewayId = 2,
-                            Status = "Vacant"
+                            Status = "Free"
                         },
                         new
                         {
                             Number = 3,
                             GatewayId = 2,
-                            Status = "Vacant"
+                            Status = "Free"
                         },
                         new
                         {
                             Number = 1,
                             GatewayId = 3,
-                            Status = "Vacant"
+                            Status = "Free"
                         },
                         new
                         {
                             Number = 2,
                             GatewayId = 3,
-                            Status = "Vacant"
+                            Status = "Free"
                         },
                         new
                         {
                             Number = 3,
                             GatewayId = 3,
-                            Status = "Vacant"
+                            Status = "Free"
                         },
                         new
                         {
                             Number = 4,
                             GatewayId = 3,
-                            Status = "Vacant"
+                            Status = "Free"
                         });
                 });
 

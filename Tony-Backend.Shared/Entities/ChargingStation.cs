@@ -20,7 +20,7 @@ namespace Tony_Backend.Shared.Entities
 
     public enum ChargingStationStatus
     {
-        Vacant,
+        Free,
         Charging,
         Completed,
         Idle

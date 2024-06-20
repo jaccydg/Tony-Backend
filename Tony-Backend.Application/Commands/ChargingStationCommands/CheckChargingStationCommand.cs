@@ -34,7 +34,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
                 return null;
             }
 
-            if (chargingStation.Status != ChargingStationStatus.Vacant )
+            if (chargingStation.Status != ChargingStationStatus.Free )
             {
                 return false;
             }

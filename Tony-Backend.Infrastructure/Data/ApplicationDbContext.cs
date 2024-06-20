@@ -47,15 +47,15 @@ namespace Tony_Backend.API.Data
                 new Gateway { Id = 4, Name = "Poste Italiane", Latitude = 45.951200, Longitude = 12.675172 });
 
             modelBuilder.Entity<ChargingStation>().HasData(
-                new ChargingStation { Number = 1, GatewayId = 1, Status = ChargingStationStatus.Vacant },
-                new ChargingStation { Number = 2, GatewayId = 1, Status = ChargingStationStatus.Vacant },
-                new ChargingStation { Number = 1, GatewayId = 2, Status = ChargingStationStatus.Vacant },
-                new ChargingStation { Number = 2, GatewayId = 2, Status = ChargingStationStatus.Vacant },
-                new ChargingStation { Number = 3, GatewayId = 2, Status = ChargingStationStatus.Vacant },
-                new ChargingStation { Number = 1, GatewayId = 3, Status = ChargingStationStatus.Vacant },
-                new ChargingStation { Number = 2, GatewayId = 3, Status = ChargingStationStatus.Vacant },
-                new ChargingStation { Number = 3, GatewayId = 3, Status = ChargingStationStatus.Vacant },
-                new ChargingStation { Number = 4, GatewayId = 3, Status = ChargingStationStatus.Vacant });
+                new ChargingStation { Number = 1, GatewayId = 1, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 2, GatewayId = 1, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 1, GatewayId = 2, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 2, GatewayId = 2, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 3, GatewayId = 2, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 1, GatewayId = 3, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 2, GatewayId = 3, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 3, GatewayId = 3, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 4, GatewayId = 3, Status = ChargingStationStatus.Free });
         }
 
     }
