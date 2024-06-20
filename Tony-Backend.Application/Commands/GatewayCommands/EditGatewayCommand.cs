@@ -11,7 +11,7 @@ using Tony_Backend.Shared.Entities;
 
 namespace Tony_Backend.Application.Commands.GatewayCommands
 {
-    public class UpdateGatewayCommand : IRequest<Gateway>
+    public class EditGatewayCommand : IRequest<Gateway>
     {
         public required int Id { get; init; }
         public required string? Name { get; init; }
@@ -19,7 +19,7 @@ namespace Tony_Backend.Application.Commands.GatewayCommands
         public required double? Latitude { get; init; }
     }
 
-    internal class UpdateGatewayCommandHandler : IRequestHandler<UpdateGatewayCommand, Gateway>
+    internal class UpdateGatewayCommandHandler : IRequestHandler<EditGatewayCommand, Gateway>
     {
         private readonly ApplicationDbContext _context;
         public UpdateGatewayCommandHandler(ApplicationDbContext context)
@@ -27,7 +27,7 @@ namespace Tony_Backend.Application.Commands.GatewayCommands
             _context = context;
         }
 
-        public async Task<Gateway> Handle(UpdateGatewayCommand request, CancellationToken cancellationToken)
+        public async Task<Gateway> Handle(EditGatewayCommand request, CancellationToken cancellationToken)
         {
             var gateway = await _context.Gateways.FindAsync(request.Id);
 

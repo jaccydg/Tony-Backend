@@ -17,12 +17,10 @@ namespace Tony_Backend.API.Controllers
     [Route("[controller]")]
     public class GatewaysController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly ISender _sender;
 
-        public GatewaysController(ApplicationDbContext context, ISender sender)
+        public GatewaysController(ISender sender)
         {
-            _context = context;
             _sender = sender;
         }
 
@@ -65,15 +63,15 @@ namespace Tony_Backend.API.Controllers
             return Ok(gateway);
         }
 
-        [HttpPut("{id}/Update")]
-        public async Task<IActionResult> Update(int id, string? name, double? longitude, double? latitude)
+        [HttpPut("{id}/Edit")]
+        public async Task<IActionResult> Edit(int id, string? name, double? longitude, double? latitude)
         {
             if (string.IsNullOrEmpty(name) && latitude == null && longitude == null)
             {
                 return BadRequest("At least one parameter (name, latitude, longitude) must be provided for update.");
             }
 
-            var gateway = await _sender.Send(new UpdateGatewayCommand() { Id = id, Name = name, Latitude = latitude, Longitude = longitude });
+            var gateway = await _sender.Send(new EditGatewayCommand() { Id = id, Name = name, Latitude = latitude, Longitude = longitude });
             
             if (gateway == null)
             {

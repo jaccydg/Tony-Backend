@@ -17,19 +17,16 @@ namespace Tony_Backend.API.Controllers
     [Route("[controller]")]
     public class ChargingStationsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly ISender _sender;
 
-        public ChargingStationsController(ApplicationDbContext context, ISender sender)
+        public ChargingStationsController(ISender sender)
         {
-            _context = context;
             _sender = sender;
         }
 
         [HttpGet("")]
         public async Task<ActionResult<IEnumerable<ChargingStation>>> GetAll()
         {
-            //return await _context.ChargingStations.ToListAsync();
             return Ok(await _sender.Send(new GetAllChargingStationCommand()));
         }
 
@@ -59,7 +56,7 @@ namespace Tony_Backend.API.Controllers
 
 
         [HttpPut("{gatewayId}/{number}/Edit")]
-        public async Task<IActionResult> Edit(int number, int gatewayId, ChargingStationStatus? status, int? userConnectedId, int? lastLogId)
+        public async Task<IActionResult> Edit([FromRoute] int number, [FromRoute] int gatewayId, ChargingStationStatus? status, int? userConnectedId, int? lastLogId)
         {
             if (status == null && userConnectedId == null && lastLogId == null)
             {
@@ -76,15 +73,14 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpDelete("{gatewayId}/{number}/Delete")]
-        public async Task<IActionResult> Delete(int number, int gatewayId)
+        public async Task<IActionResult> Delete([FromRoute] int number, [FromRoute] int gatewayId)
         {
-            var chargingStation = await _context.ChargingStations.FindAsync(number, gatewayId); 
-            if (chargingStation == null)
+
+            var found = await _sender.Send(new DeleteChargingStationCommand() { Number = number, GatewayId = gatewayId });
+            if (!found)
             {
                 return NotFound();
             }
-
-            await _sender.Send(new DeleteChargingStationCommand() { Number = number, GatewayId = gatewayId });
 
             return Ok();
         }
