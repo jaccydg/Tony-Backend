@@ -8,7 +8,18 @@ services:
       dockerfile: Tony-Backend.API/Dockerfile
     depends_on:
       - postgresdb
+    volumes:
+      - ~/.aws:/app/.aws:ro
 
+  tony-backend.queueapi:
+    image: ${DOCKER_REGISTRY-}tonybackendqueueapi
+    hostname: tony-backend-queueapi
+    build:
+      context: .
+      dockerfile: Tony-Backend.QueueAPI/Dockerfile
+    volumes:
+      - ~/.aws:/app/.aws:ro
+      
   postgresdb:
     hostname: postgresdb
     image: postgres:latest
@@ -20,6 +31,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
 
 volumes:
   postgres_data:

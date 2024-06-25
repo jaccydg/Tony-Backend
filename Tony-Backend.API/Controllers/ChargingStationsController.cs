@@ -9,6 +9,7 @@ using Tony_Backend.Shared.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Tony_Backend.Application.Commands.ChargingStationCommands.CRUD;
 using Tony_Backend.Application.Commands.ChargingStationCommands;
+using System.Security.Claims;
 
 
 namespace Tony_Backend.API.Controllers
@@ -97,15 +98,18 @@ namespace Tony_Backend.API.Controllers
             return Ok(chargingStation);
         }
 
-        //[HttpGet("{gatewayId}/{number}/Connect")]
-        //public async Task<IActionResult> Connect([FromRoute] int number, [FromRoute] int gatewayId, )
-        //{
-        //    var chargingStation = await _sender.Send(new ConnectChargingStationCommand() { Number = number, GatewayId = gatewayId });
-        //    if (chargingStation == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(chargingStation);
-        //}
+        [Authorize]
+        [HttpPost("{gatewayId}/{number}/Connect")]
+        public async Task<IActionResult> Connect([FromRoute] int number, [FromRoute] int gatewayId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var chargingStation = await _sender.Send(new ConnectChargingStationCommand() { Number = number, GatewayId = gatewayId, UserId = userId });
+            if (chargingStation == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(chargingStation);
+        }
     }
 }
