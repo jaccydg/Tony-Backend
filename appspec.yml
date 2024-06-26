@@ -5,6 +5,9 @@ files:
     destination: /home/ubuntu/tony/
 hooks:
   AfterInstall:
+    - location: migration.sh
+      timeout: 300
+      runas: root
     - location: deploy.sh
       timeout: 300
       runas: ubuntu
