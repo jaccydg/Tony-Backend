@@ -1,4 +1,4 @@
 #!/bin/bash
-cd /home/ec2-user/myapp
+cd /home/ubuntu/tony
 docker-compose down
 docker-compose up -d
