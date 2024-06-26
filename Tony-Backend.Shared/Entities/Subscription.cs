@@ -15,6 +15,8 @@ namespace Tony_Backend.Shared.Entities
         public decimal MonthlyCost { get; set; } = 0;
         public decimal MonthlyCredit { get; set; } = 0;
         public double CostKWh { get; set; } = 0;
+        public Guid UserId { get; set; }
+
 
     }
 

@@ -12,6 +12,7 @@ namespace Tony_Backend.API.Data
 
         public DbSet<Gateway> Gateways { get; set; }
         public DbSet<ChargingStation> ChargingStations { get; set; }
+        public DbSet<ChargingSession> ChargingSessions { get; set; } 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

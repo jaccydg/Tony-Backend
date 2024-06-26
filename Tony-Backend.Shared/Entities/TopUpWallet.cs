@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tony_Backend.Shared.Entities
 {
-    public class TopUpWalletcs
+    public class TopUpWallet
     {
         public DateTime DateAmount { get; set; }
         public decimal Amount { get; set; } = 0;

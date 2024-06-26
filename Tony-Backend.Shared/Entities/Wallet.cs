@@ -12,5 +12,7 @@ namespace Tony_Backend.Shared.Entities
         public Guid Id { get; set; }
         public decimal SubscriptionCredit { get; set; } = 0;
         public decimal PayPerUseCredit { get; set; } = 0;
+        public Guid UserId { get; set; }
+
     }
 }
