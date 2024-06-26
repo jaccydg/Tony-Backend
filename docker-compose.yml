@@ -13,15 +13,6 @@ services:
       - postgresdb
     volumes:
       - ~/.aws:/app/.aws:ro
-
-  tony-backend.queueapi:
-    image: ${DOCKER_REGISTRY-}tonybackendqueueapi
-    hostname: tony-backend-queueapi
-    build:
-      context: .
-      dockerfile: Tony-Backend.QueueAPI/Dockerfile
-    volumes:
-      - ~/.aws:/app/.aws:ro
       
   postgresdb:
     hostname: postgresdb

@@ -9,13 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.Infrastructure", "Tony-Backend.Infrastructure\Tony-Backend.Infrastructure.csproj", "{6143B5C2-6F13-441F-81A3-F6B48866DE0F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.QueueAPI", "Tony-Backend.QueueAPI\Tony-Backend.QueueAPI.csproj", "{EF3BB0B0-2ED3-448F-8259-4484361A3659}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.Receiver", "Tony-Backend.Receiver\Tony-Backend.Receiver.csproj", "{ABAC4217-1080-40C5-9C4D-7A779493D0A3}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{34138C4B-7367-4DE9-9889-870847F39481}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tony-Backend.Shared", "Tony-Backend.Shared\Tony-Backend.Shared.csproj", "{19BC1B40-62A2-4FF1-903B-E16497C42D4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.Shared", "Tony-Backend.Shared\Tony-Backend.Shared.csproj", "{19BC1B40-62A2-4FF1-903B-E16497C42D4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{6143B5C2-6F13-441F-81A3-F6B48866DE0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6143B5C2-6F13-441F-81A3-F6B48866DE0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6143B5C2-6F13-441F-81A3-F6B48866DE0F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
