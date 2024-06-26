@@ -5,6 +5,7 @@ using Tony_Backend.Application;
 using Tony_Backend.Shared.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddJsonFile("appsettings.api.json", optional: false, reloadOnChange: true);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
