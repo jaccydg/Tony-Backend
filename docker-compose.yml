@@ -1,5 +1,3 @@
-version: '3.4'
-
 services:
   tony-backend.api:
     image: ${DOCKER_REGISTRY-}tonybackendapi
