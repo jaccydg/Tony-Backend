@@ -11,31 +11,32 @@ using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using RestSharp;
 using Tony_Backend.Application.Commands.ChargingStationCommands.CRUD;
+using Tony_Backend.Shared.Helpers;
 
 
 namespace Tony_Backend.Application.Commands.ChargingStationCommands
 {
-    public class ConnectChargingStationCommand : IRequest<ChargingStation?>
+    public class ConnectChargingStationCommand : IRequest<bool?>
     {
         public required int Number { get; init; }
         public required int GatewayId { get; init; }
         public required string UserId { get; init; }
     }
 
-    internal class ConnectChargingStationCommandHandler : IRequestHandler<ConnectChargingStationCommand, ChargingStation?>
+    internal class ConnectChargingStationCommandHandler : IRequestHandler<ConnectChargingStationCommand, bool?>
     {
-        private readonly ApplicationDbContext _context;
         private readonly ISender _sender;
-        private readonly string _connectionString;
+        private readonly ApplicationDbContext _context;
+        private readonly IQueueOperations _queueOperations;
 
-        public ConnectChargingStationCommandHandler(ISender sender, ApplicationDbContext context, IConfiguration configuration)
+        public ConnectChargingStationCommandHandler(ISender sender, ApplicationDbContext context, IQueueOperations queueOperations)
         {
             _sender = sender;
             _context = context;
-            _connectionString = configuration.GetConnectionString("tony_backend_queueapi");
+            _queueOperations = queueOperations;
         }
 
-        public async Task<ChargingStation?> Handle(ConnectChargingStationCommand request, CancellationToken cancellationToken)
+        public async Task<bool?> Handle(ConnectChargingStationCommand request, CancellationToken cancellationToken)
         {
             // Check if charging station exists ad is free
             var chargingStationStatus = await _sender.Send(new CheckChargingStationCommand() { Number = request.Number, GatewayId = request.GatewayId });
@@ -44,24 +45,22 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
                 return null;
             }
 
-            var chargingStation = await _sender.Send(new GetChargingStationByIdCommand() { Number = request.Number, GatewayId = request.GatewayId });
+            var message = new
+            {
+                request.Number,
+                request.GatewayId,
+                request.UserId
+            }.ToString();
 
-            // API request to queue api server
-            var client = new RestClient(_connectionString);
-            var httpRequest = new RestRequest($"/ToGatewayQueue/{request.Number}/{request.GatewayId}/Connect", Method.Post);
-            httpRequest.AddQueryParameter("userId", request.UserId);
-
-            var response = client.Execute(httpRequest);
+            _queueOperations.SendMessage(message);
 
 
-            // TODO: dequeue from from-gateway queue
+            // TODO:
+            // dequeue from from-gateway queue
+            // if positive response set chargingstaiton status to idle
 
             // temporary solution
-            if (response.IsSuccessful)
-            {
-                return chargingStation;
-            }
-            return chargingStation;
+            return chargingStationStatus;
         }
     }
 }

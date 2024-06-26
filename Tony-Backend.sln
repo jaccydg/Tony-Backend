@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.Infrastructure", "Tony-Backend.Infrastructure\Tony-Backend.Infrastructure.csproj", "{6143B5C2-6F13-441F-81A3-F6B48866DE0F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.QueueAPI", "Tony-Backend.QueueAPI\Tony-Backend.QueueAPI.csproj", "{EF3BB0B0-2ED3-448F-8259-4484361A3659}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tony-Backend.Receiver", "Tony-Backend.Receiver\Tony-Backend.Receiver.csproj", "{ABAC4217-1080-40C5-9C4D-7A779493D0A3}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{34138C4B-7367-4DE9-9889-870847F39481}"
@@ -21,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		appspec.yml = appspec.yml
 		deploy.sh = deploy.sh
+		migration.sh = migration.sh
 	EndProjectSection
 EndProject
 Global
@@ -41,10 +40,6 @@ Global
 		{6143B5C2-6F13-441F-81A3-F6B48866DE0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6143B5C2-6F13-441F-81A3-F6B48866DE0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6143B5C2-6F13-441F-81A3-F6B48866DE0F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF3BB0B0-2ED3-448F-8259-4484361A3659}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABAC4217-1080-40C5-9C4D-7A779493D0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU

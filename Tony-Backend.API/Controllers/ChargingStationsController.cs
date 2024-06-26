@@ -10,6 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using Tony_Backend.Application.Commands.ChargingStationCommands.CRUD;
 using Tony_Backend.Application.Commands.ChargingStationCommands;
 using System.Security.Claims;
+using Tony_Backend.Shared.Helpers;
 
 
 namespace Tony_Backend.API.Controllers
@@ -20,10 +21,13 @@ namespace Tony_Backend.API.Controllers
     public class ChargingStationsController : ControllerBase
     {
         private readonly ISender _sender;
+        private readonly IQueueOperations _queueOperations;
 
-        public ChargingStationsController(ISender sender)
+
+        public ChargingStationsController(ISender sender, IQueueOperations queueOperations)
         {
             _sender = sender;
+            _queueOperations = queueOperations;
         }
 
         [HttpGet("")]

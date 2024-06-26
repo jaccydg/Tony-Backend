@@ -1,5 +1,3 @@
-version: '3.4'
-
 services:
   tony-backend.api:
     image: ${DOCKER_REGISTRY-}tonybackendapi
@@ -7,19 +5,9 @@ services:
       context: .
       dockerfile: Tony-Backend.API/Dockerfile
     ports:
-      - "3000:8081"
-      - "3001:8080"
+      - "3000:3000"
     depends_on:
       - postgresdb
-    volumes:
-      - ~/.aws:/app/.aws:ro
-
-  tony-backend.queueapi:
-    image: ${DOCKER_REGISTRY-}tonybackendqueueapi
-    hostname: tony-backend-queueapi
-    build:
-      context: .
-      dockerfile: Tony-Backend.QueueAPI/Dockerfile
     volumes:
       - ~/.aws:/app/.aws:ro
       
