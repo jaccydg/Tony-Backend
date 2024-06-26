@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Tony_Backend.API.Data;
 using Tony_Backend.Application;
-using Tony_Backend.Application.Commands.GatewayCommands;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => {
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
     options.UseNpgsql(builder.Configuration.GetConnectionString("postgres"));
 });
 
@@ -15,6 +15,18 @@ builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+// Enable Cors
+builder.Services.AddCors(o => o.AddPolicy("AllowAllPolicy", builder =>
+{
+    builder.WithOrigins(
+        "https://localhost:8080",
+        "https://192.168.19.225:8080"
+        )
+           .AllowAnyMethod()
+           .AllowAnyHeader()
+           .AllowCredentials();
+}));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -33,6 +45,8 @@ var app = builder.Build();
 
 //app.UseAuthentication();
 //app.UseAuthorization();
+
+app.UseCors("AllowAllPolicy");
 
 app.MapIdentityApi<IdentityUser>();
 
