@@ -11,9 +11,9 @@ namespace Tony_Backend.Application.Commands.ChargingSessionCommands.CRUD
 {
     public class CreateChargingSessionCommand : IRequest<ChargingSession>
     {
-        public required Guid UserId { get; init; }
+        public required string UserId { get; init; }
         public required int ChargingStationNumber { get; init; }
-        public required Guid GatewayId { get; init; }
+        public required string GatewayId { get; init; }
     }
 
     internal class CreateChargingSessionCommandHandler : IRequestHandler<CreateChargingSessionCommand, ChargingSession>

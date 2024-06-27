@@ -27,11 +27,6 @@ namespace Tony_Backend.API.Data
                 entity
                     .HasKey(cs => new { cs.Id });
 
-                entity
-                    .HasMany(c => c.ChargingLogs)
-                    .WithOne(cs => cs.ChargingSession)
-                    .HasForeignKey(cs => cs.ChargingSessionId);
-
                 entity 
                     .HasOne(c => c.User)
                     .WithMany(u => u.ChargingSessions)
@@ -74,8 +69,6 @@ namespace Tony_Backend.API.Data
                     .WithOne(cs => cs.ChargingStation)
                     .HasForeignKey(cs => cs.ChargingStationId);
 
-
-
                 // Define Status required
                 entity.Property(b => b.Status)
                     .IsRequired()
@@ -94,6 +87,11 @@ namespace Tony_Backend.API.Data
             {
                 entity
                     .HasKey(s => new { s.Id });
+
+                entity
+                    .HasOne(w => w.User)
+                    .WithOne(u => u.Subscription)
+                    .HasForeignKey<Subscription>(w => w.UserId);
             });
 
             modelBuilder.Entity<TopUpWallet>(entity =>
@@ -109,6 +107,11 @@ namespace Tony_Backend.API.Data
             {
                 entity
                     .HasKey(w => new { w.Id });
+
+                entity
+                    .HasOne(w => w.User)
+                    .WithOne(u => u.Wallet)
+                    .HasForeignKey<Wallet>(w => w.UserId);
             });
 
 
@@ -125,16 +128,16 @@ namespace Tony_Backend.API.Data
                 .HasData(gatewayList);
 
             modelBuilder.Entity<ChargingStation>().HasData(
-                new ChargingStation { Number = 1, GatewayId = gatewayList[0].Id, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 2, GatewayId = gatewayList[0].Id, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 1, GatewayId = gatewayList[1].Id, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 2, GatewayId = gatewayList[1].Id, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 3, GatewayId = gatewayList[1].Id, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 1, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 2, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 3, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 4, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 1, GatewayId = gatewayList[3].Id, Status = ChargingStationStatus.Free }
+                new ChargingStation { Number = 1, GatewayId = gatewayList[0].Id.ToString(), Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 2, GatewayId = gatewayList[0].Id.ToString(), Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 1, GatewayId = gatewayList[1].Id.ToString(), Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 2, GatewayId = gatewayList[1].Id.ToString(), Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 3, GatewayId = gatewayList[1].Id.ToString(), Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 1, GatewayId = gatewayList[2].Id.ToString(), Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 2, GatewayId = gatewayList[2].Id.ToString(), Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 3, GatewayId = gatewayList[2].Id.ToString(), Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 4, GatewayId = gatewayList[2].Id.ToString(), Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 1, GatewayId = gatewayList[3].Id.ToString(), Status = ChargingStationStatus.Free }
             );
 
             modelBuilder.Entity<ApplicationUser>().HasData(

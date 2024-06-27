@@ -18,7 +18,7 @@ namespace Tony_Backend.Shared.Entities
         public decimal MonthlyCredit { get; set; } = 0;
         public double CostKWh { get; set; } = 0;
 
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         // navigation properties
         [JsonIgnore]

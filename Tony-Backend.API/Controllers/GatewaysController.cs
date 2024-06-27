@@ -99,7 +99,7 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpGet("{id}/GetGatewayInfo")]
-        public async Task<ActionResult<GatewayInfoDTO>> GetGatewayInfo([FromRoute] Guid id)
+        public async Task<ActionResult<GatewayInfoDTO>> GetGatewayInfo([FromRoute] string id)
         {
             var gateways = await _sender.Send(new GetGatewayInfoCommand() { GatewayId = id });
 

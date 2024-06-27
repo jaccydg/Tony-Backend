@@ -48,7 +48,7 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(int number, Guid gatewayId, ChargingStationStatus status, int? userConnectedId, string? lastLog)
+        public async Task<IActionResult> Create(int number, string gatewayId, ChargingStationStatus status, int? userConnectedId, string? lastLog)
         {
             if (userConnectedId == null || lastLog == null)
             {

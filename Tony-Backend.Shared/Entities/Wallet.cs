@@ -15,7 +15,7 @@ namespace Tony_Backend.Shared.Entities
         public decimal SubscriptionCredit { get; set; } = 0;
         public decimal PayPerUseCredit { get; set; } = 0;
 
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         // navigation properties
         [JsonIgnore]

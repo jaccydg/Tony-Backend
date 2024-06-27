@@ -16,7 +16,7 @@ namespace Tony_Backend.Shared.Entities
         public int? UserConnectedId { get; set; }
         public string? LastLog { get; set; }
 
-        public Guid GatewayId { get; set; }
+        public string GatewayId { get; set; }
 
         // Navigation properties
         [JsonIgnore]

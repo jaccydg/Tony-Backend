@@ -24,8 +24,8 @@ namespace Tony_Backend.Shared.Entities
         public decimal Cost { get; set; }
         public TimeSpan Time { get; set; }
 
-        public Guid ChargingSessionId { get; set; }
-        public Guid UserId { get; set; }
+        public string ChargingSessionId { get; set; }
+        public string UserId { get; set; }
 
         // navigation properties
         [JsonIgnore]
