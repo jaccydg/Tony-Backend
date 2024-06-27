@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Tony_Backend.Shared.Entities
@@ -15,7 +16,7 @@ namespace Tony_Backend.Shared.Entities
     //Cost so far
     //Time
     //Userid
-    internal class ChargingLog
+    public class ChargingLog
     {
         public DateTime Date { get; set; }
         public double Speed { get; set; }
@@ -27,7 +28,9 @@ namespace Tony_Backend.Shared.Entities
         public Guid UserId { get; set; }
 
         // navigation properties
+        [JsonIgnore]
         public ChargingSession ChargingSession { get; set; }
+        [JsonIgnore]
         public IdentityUser User { get; set; }
     }
 }

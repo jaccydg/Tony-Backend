@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Tony_Backend.Shared.Entities;
+using System.Text.Json.Serialization;
 
 namespace Tony_Backend.API.Data
 {
@@ -21,10 +22,17 @@ namespace Tony_Backend.API.Data
         {
             base.OnModelCreating(modelBuilder);
 
+
+
             modelBuilder.Entity<ChargingSession>(entity =>
             {
                 entity
                     .HasKey(cs => new { cs.Id });
+
+                entity
+                    .HasMany(c => c.ChargingLogs)
+                    .WithOne(cs => cs.ChargingSession)
+                    .HasForeignKey(cs => cs.ChargingSessionId);
 
                 entity
                     .Property(cs => cs.Status)
@@ -55,8 +63,15 @@ namespace Tony_Backend.API.Data
                 entity
                     .HasOne(c => c.Gateway)
                     .WithMany(g => g.ChargingStations)
-                    .HasForeignKey(c => c.GatewayId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .HasForeignKey(c => c.GatewayId);
+                // .OnDelete(DeleteBehavior.Cascade); // set by default
+
+                entity
+                    .HasMany(c => c.ChargingSessions)
+                    .WithOne(cs => cs.ChargingStation)
+                    .HasForeignKey(cs => cs.ChargingStationId);
+
+
 
                 // Define Status required
                 entity.Property(b => b.Status)

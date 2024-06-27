@@ -17,7 +17,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
         public required Guid GatewayId { get; init; }
         public required ChargingStationStatus? Status { get; init; }
         public required int? UserConnectedId { get; init; }
-        public required int? LastLogId { get; init; }
+        public required string? LastLog { get; init; }
     }
 
     internal class UpdateChargingStationCommandHandler : IRequestHandler<EditChargingStationCommand, ChargingStation>
@@ -47,9 +47,9 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
                 chargingStation.UserConnectedId = request.UserConnectedId;
             }
 
-            if (request.LastLogId != null)
+            if (request.LastLog != null)
             {
-                chargingStation.LastLogId = request.LastLogId;
+                chargingStation.LastLog = request.LastLog;
             }
 
             await _context.SaveChangesAsync();

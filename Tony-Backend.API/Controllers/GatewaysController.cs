@@ -40,7 +40,7 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Gateway>> GetById([FromRoute] int id)
+        public async Task<ActionResult<Gateway>> GetById([FromRoute] Guid id)
         {
             var gateway = await _sender.Send(new GetGatewayByIdCommand() { Id = id });
 
@@ -66,7 +66,7 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpPut("{id}/Edit")]
-        public async Task<IActionResult> Edit([FromRoute] int id, string? name, double? longitude, double? latitude)
+        public async Task<IActionResult> Edit([FromRoute] Guid id, string? name, double? longitude, double? latitude)
         {
             if (string.IsNullOrEmpty(name) && latitude == null && longitude == null)
             {
@@ -84,7 +84,7 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpDelete("{id}/Delete")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             // TODO: 
             // questo è un accrocchio, sarebbe bello usare la gestione degli errori
@@ -99,7 +99,7 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpGet("{id}/GetGatewayInfo")]
-        public async Task<ActionResult<GatewayInfoDTO>> GetGatewayInfo([FromRoute] int id)
+        public async Task<ActionResult<GatewayInfoDTO>> GetGatewayInfo([FromRoute] Guid id)
         {
             var gateways = await _sender.Send(new GetGatewayInfoCommand() { GatewayId = id });
 

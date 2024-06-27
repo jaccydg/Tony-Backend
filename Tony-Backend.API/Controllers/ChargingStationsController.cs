@@ -48,28 +48,28 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(int number, Guid gatewayId, ChargingStationStatus status, int? userConnectedId, int? lastLogId)
+        public async Task<IActionResult> Create(int number, Guid gatewayId, ChargingStationStatus status, int? userConnectedId, string? lastLog)
         {
-            if (userConnectedId == null || lastLogId == null)
+            if (userConnectedId == null || lastLog == null)
             {
-                return BadRequest("At least one parameter (userConnectedId, lastLogId) must be provided.");
+                return BadRequest("At least one parameter (userConnectedId, lastLog) must be provided.");
             }
 
-            var chargingStation = await _sender.Send(new CreateChargingStationCommand() { Number = number, GatewayId = gatewayId, Status = status, UserConnectedId = userConnectedId, LastLogId = lastLogId });
+            var chargingStation = await _sender.Send(new CreateChargingStationCommand() { Number = number, GatewayId = gatewayId, Status = status, UserConnectedId = userConnectedId, LastLog = lastLog });
 
             return Ok(chargingStation);
         }
 
 
         [HttpPut("{gatewayId}/{number}/Edit")]
-        public async Task<IActionResult> Edit([FromRoute] int number, [FromRoute] Guid gatewayId, ChargingStationStatus? status, int? userConnectedId, int? lastLogId)
+        public async Task<IActionResult> Edit([FromRoute] int number, [FromRoute] Guid gatewayId, ChargingStationStatus? status, int? userConnectedId, string? lastLog)
         {
-            if (status == null && userConnectedId == null && lastLogId == null)
+            if (status == null && userConnectedId == null && lastLog == null)
             {
-                return BadRequest("At least one parameter (status, userConnectedId, lastLogId) must be provided for edit.");
+                return BadRequest("At least one parameter (status, userConnectedId, lastLog) must be provided for edit.");
             }
 
-            var chargingStation = await _sender.Send(new EditChargingStationCommand() { Number = number, GatewayId = gatewayId, Status = status, UserConnectedId = userConnectedId, LastLogId = lastLogId });
+            var chargingStation = await _sender.Send(new EditChargingStationCommand() { Number = number, GatewayId = gatewayId, Status = status, UserConnectedId = userConnectedId, LastLog = lastLog });
             if (chargingStation == null)
             {
                 return NotFound();
