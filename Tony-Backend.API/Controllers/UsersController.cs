@@ -23,7 +23,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("")]
-    public async Task<ActionResult<IEnumerable<IdentityUser>>> GetAll()
+    public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetAll()
     {
         return Ok(await _sender.Send(new GetAllUsersCommand()));
     }

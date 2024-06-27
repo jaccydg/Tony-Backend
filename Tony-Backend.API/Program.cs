@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Tony_Backend.API.Data;
 using Tony_Backend.Application;
+using Tony_Backend.Shared.Entities;
 using Tony_Backend.Shared.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +17,7 @@ builder.Services.AddScoped<IQueueOperations, QueueOperations>();
 
 // Add Auth Provider
 builder.Services.AddAuthorization();
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -52,7 +53,7 @@ var app = builder.Build();
 
 app.UseCors("AllowAllPolicy");
 
-app.MapIdentityApi<IdentityUser>();
+app.MapIdentityApi<ApplicationUser>();
 
 // Configure the HTTP request pipeline.
 // if (app.Environment.IsDevelopment())

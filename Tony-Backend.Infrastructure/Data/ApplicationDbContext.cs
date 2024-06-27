@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Tony_Backend.API.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
@@ -22,8 +22,6 @@ namespace Tony_Backend.API.Data
         {
             base.OnModelCreating(modelBuilder);
 
-
-
             modelBuilder.Entity<ChargingSession>(entity =>
             {
                 entity
@@ -33,6 +31,11 @@ namespace Tony_Backend.API.Data
                     .HasMany(c => c.ChargingLogs)
                     .WithOne(cs => cs.ChargingSession)
                     .HasForeignKey(cs => cs.ChargingSessionId);
+
+                entity 
+                    .HasOne(c => c.User)
+                    .WithMany(u => u.ChargingSessions)
+                    .HasForeignKey(c => c.UserId);
 
                 entity
                     .Property(cs => cs.Status)
@@ -134,6 +137,10 @@ namespace Tony_Backend.API.Data
                 new ChargingStation { Number = 1, GatewayId = gatewayList[3].Id, Status = ChargingStationStatus.Free }
             );
 
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser { Email = "giulio@giulio.com", PasswordHash = "Ciaociao35@".GetHashCode().ToString() },
+                new ApplicationUser { Email = "a@a.com", PasswordHash = "Password1!".GetHashCode().ToString() }
+            );
 
         }
 

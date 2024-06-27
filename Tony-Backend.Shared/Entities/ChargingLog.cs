@@ -31,6 +31,6 @@ namespace Tony_Backend.Shared.Entities
         [JsonIgnore]
         public ChargingSession ChargingSession { get; set; }
         [JsonIgnore]
-        public IdentityUser User { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

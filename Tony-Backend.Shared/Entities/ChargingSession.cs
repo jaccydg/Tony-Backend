@@ -30,7 +30,7 @@ namespace Tony_Backend.Shared.Entities
 
         // navigation properties
         [JsonIgnore]
-        public IdentityUser User { get; set; }
+        public ApplicationUser User { get; set; }
         [JsonIgnore]
         public ChargingStation ChargingStation { get; set; }
         [JsonIgnore]
