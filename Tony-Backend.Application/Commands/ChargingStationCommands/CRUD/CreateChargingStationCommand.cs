@@ -15,9 +15,9 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
     public class CreateChargingStationCommand : IRequest<ChargingStation>
     {
         public required int Number { get; init; }
-        public required string GatewayId { get; init; }
+        public required Guid GatewayId { get; init; }
         public required ChargingStationStatus Status { get; init; }
-        public required int? UserConnectedId { get; init; }
+        public required string? UserConnectedId { get; init; }
         public required string? LastLog { get; init; }
     }
 
@@ -34,6 +34,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
 
             var chargingStation = new ChargingStation
             {
+                Id = Guid.NewGuid(),
                 Number = request.Number,
                 GatewayId = request.GatewayId,
                 Status = request.Status,
@@ -44,7 +45,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
             _context.ChargingStations.Add(chargingStation);
             await _context.SaveChangesAsync();
 
-            return await _context.ChargingStations.FindAsync(request.Number, request.GatewayId);
+            return await _context.ChargingStations.FindAsync(chargingStation.Id);
         }
     }
 }

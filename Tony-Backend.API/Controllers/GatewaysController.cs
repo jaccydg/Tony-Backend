@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Tony_Backend.API.Data;
 using Tony_Backend.Shared.Entities;
-using Tony_Backend.API.Migrations;
 using Tony_Backend.Application.Commands.GatewayCommands.CRUD;
 using Tony_Backend.Application.Commands.GatewayCommands;
 using System.Reflection.Metadata.Ecma335;
@@ -68,10 +67,6 @@ namespace Tony_Backend.API.Controllers
         [HttpPut("{id}/Edit")]
         public async Task<IActionResult> Edit([FromRoute] Guid id, string? name, double? longitude, double? latitude)
         {
-            if (string.IsNullOrEmpty(name) && latitude == null && longitude == null)
-            {
-                return BadRequest("At least one parameter (name, latitude, longitude) must be provided for update.");
-            }
 
             var gateway = await _sender.Send(new EditGatewayCommand() { Id = id, Name = name, Latitude = latitude, Longitude = longitude });
 
@@ -99,7 +94,7 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpGet("{id}/GetGatewayInfo")]
-        public async Task<ActionResult<GatewayInfoDTO>> GetGatewayInfo([FromRoute] string id)
+        public async Task<ActionResult<GatewayInfoDTO>> GetGatewayInfo([FromRoute] Guid id)
         {
             var gateways = await _sender.Send(new GetGatewayInfoCommand() { GatewayId = id });
 

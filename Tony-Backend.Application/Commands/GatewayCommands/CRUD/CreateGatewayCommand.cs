@@ -30,6 +30,7 @@ namespace Tony_Backend.Application.Commands.GatewayCommands.CRUD
         {
             var gateway = new Gateway
             {
+                Id = Guid.NewGuid(),
                 Name = request.Name,
                 Latitude = request.Latitude,
                 Longitude = request.Longitude

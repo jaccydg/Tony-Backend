@@ -25,8 +25,8 @@ namespace Tony_Backend.Shared.Entities
         public DateTime? EndingDate { get; set; }
 
         public string UserId { get; set; }
-        public string ChargingStationId { get; set; }
-        public string GatewayId { get; set; }
+        public Guid ChargingStationId { get; set; }
+        public Guid GatewayId { get; set; }
 
         // navigation properties
         [JsonIgnore]

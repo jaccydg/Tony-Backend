@@ -25,7 +25,9 @@ namespace Tony_Backend.API.Data
             modelBuilder.Entity<ChargingSession>(entity =>
             {
                 entity
-                    .HasKey(cs => new { cs.Id });
+                    .HasKey(cs =>  cs.Id);
+                entity
+                    .Property(cs => cs.Id).ValueGeneratedNever();
 
                 entity 
                     .HasOne(c => c.User)
@@ -55,7 +57,9 @@ namespace Tony_Backend.API.Data
             modelBuilder.Entity<ChargingStation>(entity =>
             {
                 entity
-                    .HasKey(cs => new { cs.Id });
+                    .HasKey(cs => cs.Id);
+                entity
+                    .Property(cs => cs.Id).ValueGeneratedNever();
 
                 // Define relation between ChargingStation and Gateway
                 entity
@@ -80,14 +84,17 @@ namespace Tony_Backend.API.Data
             modelBuilder.Entity<Gateway>(entity =>
             {
                 entity
-                    .HasKey(g => new { g.Id });
+                    .HasKey(g => g.Id);
+                entity
+                    .Property(cs => cs.Id).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<Subscription>(entity =>
             {
                 entity
-                    .HasKey(s => new { s.Id });
-
+                    .HasKey(s => s.Id );
+                entity
+                    .Property(cs => cs.Id).ValueGeneratedNever();
                 entity
                     .HasOne(w => w.User)
                     .WithOne(u => u.Subscription)
@@ -106,8 +113,9 @@ namespace Tony_Backend.API.Data
             modelBuilder.Entity<Wallet>(entity =>
             {
                 entity
-                    .HasKey(w => new { w.Id });
-
+                    .HasKey(w => w.Id );
+                entity
+                    .Property(cs => cs.Id).ValueGeneratedNever();
                 entity
                     .HasOne(w => w.User)
                     .WithOne(u => u.Wallet)
@@ -128,16 +136,16 @@ namespace Tony_Backend.API.Data
                 .HasData(gatewayList);
 
             modelBuilder.Entity<ChargingStation>().HasData(
-                new ChargingStation { Number = 1, GatewayId = gatewayList[0].Id.ToString(), Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 2, GatewayId = gatewayList[0].Id.ToString(), Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 1, GatewayId = gatewayList[1].Id.ToString(), Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 2, GatewayId = gatewayList[1].Id.ToString(), Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 3, GatewayId = gatewayList[1].Id.ToString(), Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 1, GatewayId = gatewayList[2].Id.ToString(), Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 2, GatewayId = gatewayList[2].Id.ToString(), Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 3, GatewayId = gatewayList[2].Id.ToString(), Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 4, GatewayId = gatewayList[2].Id.ToString(), Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 1, GatewayId = gatewayList[3].Id.ToString(), Status = ChargingStationStatus.Free }
+                new ChargingStation { Id = Guid.NewGuid(), Number = 1, GatewayId = gatewayList[0].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Id = Guid.NewGuid(), Number = 2, GatewayId = gatewayList[0].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Id = Guid.NewGuid(), Number = 1, GatewayId = gatewayList[1].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Id = Guid.NewGuid(), Number = 2, GatewayId = gatewayList[1].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Id = Guid.NewGuid(), Number = 3, GatewayId = gatewayList[1].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Id = Guid.NewGuid(), Number = 1, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Id = Guid.NewGuid(), Number = 2, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Id = Guid.NewGuid(), Number = 3, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Id = Guid.NewGuid(), Number = 4, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Id = Guid.NewGuid(), Number = 1, GatewayId = gatewayList[3].Id, Status = ChargingStationStatus.Free }
             );
 
             modelBuilder.Entity<ApplicationUser>().HasData(

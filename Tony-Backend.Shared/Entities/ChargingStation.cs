@@ -13,10 +13,10 @@ namespace Tony_Backend.Shared.Entities
 
         public int Number { get; set; }
         public ChargingStationStatus? Status { get; set; }
-        public int? UserConnectedId { get; set; }
+        public string? UserConnectedId { get; set; }
         public string? LastLog { get; set; }
 
-        public string GatewayId { get; set; }
+        public Guid GatewayId { get; set; }
 
         // Navigation properties
         [JsonIgnore]

@@ -33,7 +33,7 @@ namespace Tony_Backend.Application.Commands.GatewayCommands.CRUD
 
             if (gateway == null)
             {
-                return gateway;
+                return null;
             }
 
             // Update properties if provided values are not null or empty
