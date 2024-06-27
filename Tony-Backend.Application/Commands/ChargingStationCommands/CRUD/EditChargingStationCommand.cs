@@ -14,7 +14,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
     public class EditChargingStationCommand : IRequest<ChargingStation>
     {
         public required int Number { get; init; }
-        public required int GatewayId { get; init; }
+        public required Guid GatewayId { get; init; }
         public required ChargingStationStatus? Status { get; init; }
         public required int? UserConnectedId { get; init; }
         public required int? LastLogId { get; init; }

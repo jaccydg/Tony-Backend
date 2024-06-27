@@ -13,7 +13,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
     public class DeleteChargingStationCommand : IRequest<bool>
     {
         public required int Number { get; init; }
-        public required int GatewayId { get; init; }
+        public required Guid GatewayId { get; init; }
     }
 
     internal class DeleteChargingStationCommandHandler : IRequestHandler<DeleteChargingStationCommand, bool>

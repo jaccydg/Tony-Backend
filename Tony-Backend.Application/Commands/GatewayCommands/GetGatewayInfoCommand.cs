@@ -12,7 +12,7 @@ namespace Tony_Backend.Application.Commands.GatewayCommands
 {
     public class GetGatewayInfoCommand : IRequest<GatewayInfoDTO>
     {
-        public int GatewayId { get; set; }
+        public Guid GatewayId { get; set; }
     }
 
     internal class GetGatewayInfoCommandHandler : IRequestHandler<GetGatewayInfoCommand, GatewayInfoDTO>

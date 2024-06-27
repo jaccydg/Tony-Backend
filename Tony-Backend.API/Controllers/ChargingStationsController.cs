@@ -37,7 +37,7 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpGet("{gatewayId}/{number}")]
-        public async Task<ActionResult<ChargingStation>> GetById([FromRoute] int number, [FromRoute] int gatewayId)
+        public async Task<ActionResult<ChargingStation>> GetById([FromRoute] int number, [FromRoute] Guid gatewayId)
         {
             var chargingStation = await _sender.Send(new GetChargingStationByIdCommand() { Number = number, GatewayId = gatewayId});
             if (chargingStation == null)
@@ -48,7 +48,7 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(int number, int gatewayId, ChargingStationStatus status, int? userConnectedId, int? lastLogId)
+        public async Task<IActionResult> Create(int number, Guid gatewayId, ChargingStationStatus status, int? userConnectedId, int? lastLogId)
         {
             if (userConnectedId == null || lastLogId == null)
             {
@@ -62,7 +62,7 @@ namespace Tony_Backend.API.Controllers
 
 
         [HttpPut("{gatewayId}/{number}/Edit")]
-        public async Task<IActionResult> Edit([FromRoute] int number, [FromRoute] int gatewayId, ChargingStationStatus? status, int? userConnectedId, int? lastLogId)
+        public async Task<IActionResult> Edit([FromRoute] int number, [FromRoute] Guid gatewayId, ChargingStationStatus? status, int? userConnectedId, int? lastLogId)
         {
             if (status == null && userConnectedId == null && lastLogId == null)
             {
@@ -79,7 +79,7 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpDelete("{gatewayId}/{number}/Delete")]
-        public async Task<IActionResult> Delete([FromRoute] int number, [FromRoute] int gatewayId)
+        public async Task<IActionResult> Delete([FromRoute] int number, [FromRoute] Guid gatewayId)
         {
 
             var found = await _sender.Send(new DeleteChargingStationCommand() { Number = number, GatewayId = gatewayId });
@@ -92,7 +92,7 @@ namespace Tony_Backend.API.Controllers
         }
 
         [HttpGet("{gatewayId}/{number}/Check")]
-        public async Task<ActionResult<ChargingStation>> Check([FromRoute] int number, [FromRoute] int gatewayId)
+        public async Task<ActionResult<ChargingStation>> Check([FromRoute] int number, [FromRoute] Guid gatewayId)
         {
             var chargingStation = await _sender.Send(new CheckChargingStationCommand() { Number = number, GatewayId = gatewayId });
             if (chargingStation == null)
@@ -104,7 +104,7 @@ namespace Tony_Backend.API.Controllers
 
         [Authorize]
         [HttpPost("{gatewayId}/{number}/Connect")]
-        public async Task<IActionResult> Connect([FromRoute] int number, [FromRoute] int gatewayId)
+        public async Task<IActionResult> Connect([FromRoute] int number, [FromRoute] Guid gatewayId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var chargingStation = await _sender.Send(new ConnectChargingStationCommand() { Number = number, GatewayId = gatewayId, UserId = userId });

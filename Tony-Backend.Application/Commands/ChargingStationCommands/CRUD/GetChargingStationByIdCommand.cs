@@ -14,7 +14,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
     public class GetChargingStationByIdCommand : IRequest<ChargingStation>
     {
         public required int Number { get; init; }
-        public required int GatewayId { get; init; }
+        public required Guid GatewayId { get; init; }
     }
 
     internal class GetChargingStationByIdCommandHandler : IRequestHandler<GetChargingStationByIdCommand, ChargingStation>

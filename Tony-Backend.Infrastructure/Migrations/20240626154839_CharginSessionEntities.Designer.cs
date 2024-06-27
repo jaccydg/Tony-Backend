@@ -227,7 +227,7 @@ namespace Tony_Backend.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("ChargindStationNumber")
+                    b.Property<int>("ChargingStationNumber")
                         .HasColumnType("integer");
 
                     b.Property<decimal?>("CostKWh")

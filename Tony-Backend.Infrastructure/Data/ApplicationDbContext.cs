@@ -10,19 +10,46 @@ namespace Tony_Backend.API.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
 
-        public DbSet<Gateway> Gateways { get; set; }
-        public DbSet<ChargingStation> ChargingStations { get; set; }
         public DbSet<ChargingSession> ChargingSessions { get; set; } 
+        public DbSet<ChargingStation> ChargingStations { get; set; }
+        public DbSet<Gateway> Gateways { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<TopUpWallet> TopUpWallets { get; set; }
+        public DbSet<Wallet> Wallets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
+            modelBuilder.Entity<ChargingSession>(entity =>
+            {
+                entity
+                    .HasKey(cs => new { cs.Id });
+
+                entity
+                    .Property(cs => cs.Status)
+                    .IsRequired()
+                    .HasConversion(
+                        v => v.ToString(),
+                        v => (ChargingSessionStatus)Enum.Parse(typeof(ChargingSessionStatus), v));
+
+                entity
+                    .Property(cs => cs.UserId)
+                    .IsRequired();
+
+                entity
+                    .Property(cs => cs.ChargingStationNumber)
+                    .IsRequired();
+
+                entity
+                    .Property(cs => cs.GatewayId)
+                    .IsRequired();
+            });
+
             modelBuilder.Entity<ChargingStation>(entity =>
             {
-                // Define composite primary key
                 entity
-                    .HasKey(cs => new { cs.Number, cs.GatewayId });
+                    .HasKey(cs => new { cs.Id });
 
                 // Define relation between ChargingStation and Gateway
                 entity
@@ -39,24 +66,60 @@ namespace Tony_Backend.API.Data
                         v => (ChargingStationStatus)Enum.Parse(typeof(ChargingStationStatus), v));
             });
 
+            modelBuilder.Entity<Gateway>(entity =>
+            {
+                entity
+                    .HasKey(g => new { g.Id });
+            });
+
+            modelBuilder.Entity<Subscription>(entity =>
+            {
+                entity
+                    .HasKey(s => new { s.Id });
+            });
+
+            modelBuilder.Entity<TopUpWallet>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(t => t.WalletId).IsRequired();
+                entity.Property(t => t.Amount).IsRequired();
+                entity.Property(t => t.Date).IsRequired();
+            });
+
+            modelBuilder.Entity<Wallet>(entity =>
+            {
+                entity
+                    .HasKey(w => new { w.Id });
+            });
+
 
             // SEED DATA
-            modelBuilder.Entity<Gateway>().HasData(
-                new Gateway { Id = 1, Name = "Consorzio Universitario", Latitude = 45.951543, Longitude = 12.680627 },
-                new Gateway { Id = 2, Name = "Aldi - Pordenone", Latitude = 45.953619, Longitude = 12.687382 },
-                new Gateway { Id = 3, Name = "Naonis Gym", Latitude = 45.953282, Longitude = 12.672556 },
-                new Gateway { Id = 4, Name = "Poste Italiane", Latitude = 45.951200, Longitude = 12.675172 });
+            var gatewayList = new List<Gateway>
+            {
+                new Gateway { Id = Guid.NewGuid(), Name = "Consorzio Universitario", Latitude = 45.951543, Longitude = 12.680627 },
+                new Gateway { Id = Guid.NewGuid(), Name = "Aldi - Pordenone", Latitude = 45.953619, Longitude = 12.687382 },
+                new Gateway { Id = Guid.NewGuid(), Name = "Naonis Gym", Latitude = 45.953282, Longitude = 12.672556 },
+                new Gateway { Id = Guid.NewGuid(), Name = "Poste Italiane", Latitude = 45.951200, Longitude = 12.675172 }
+            };
+
+            modelBuilder.Entity<Gateway>()
+                .HasData(gatewayList);
 
             modelBuilder.Entity<ChargingStation>().HasData(
-                new ChargingStation { Number = 1, GatewayId = 1, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 2, GatewayId = 1, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 1, GatewayId = 2, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 2, GatewayId = 2, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 3, GatewayId = 2, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 1, GatewayId = 3, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 2, GatewayId = 3, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 3, GatewayId = 3, Status = ChargingStationStatus.Free },
-                new ChargingStation { Number = 4, GatewayId = 3, Status = ChargingStationStatus.Free });
+                new ChargingStation { Number = 1, GatewayId = gatewayList[0].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 2, GatewayId = gatewayList[0].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 1, GatewayId = gatewayList[1].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 2, GatewayId = gatewayList[1].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 3, GatewayId = gatewayList[1].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 1, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 2, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 3, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 4, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
+                new ChargingStation { Number = 1, GatewayId = gatewayList[3].Id, Status = ChargingStationStatus.Free }
+            );
+
+
         }
 
     }

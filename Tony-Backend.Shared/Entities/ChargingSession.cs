@@ -20,8 +20,8 @@ namespace Tony_Backend.Shared.Entities
 
         public decimal? CostKWh { get; set; }
         public Guid UserId { get; set; }
-        public int ChargindStationNumber { get; set; }
-        public int GatewayId { get; set; }
+        public int ChargingStationNumber { get; set; }
+        public Guid GatewayId { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime? EndingDate { get; set; }
     }
