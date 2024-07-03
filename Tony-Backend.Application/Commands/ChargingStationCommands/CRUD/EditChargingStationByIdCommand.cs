@@ -48,11 +48,6 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
                 chargingStation.UserConnectedId = request.UserConnectedId;
             }
 
-            if (request.LastLog != null)
-            {
-                chargingStation.LastLog = request.LastLog;
-            }
-
             await _context.SaveChangesAsync();
 
             return chargingStation;

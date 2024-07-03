@@ -38,8 +38,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
                 Number = request.Number,
                 GatewayId = request.GatewayId,
                 Status = request.Status,
-                UserConnectedId = request.UserConnectedId,
-                LastLog = request.LastLog
+                UserConnectedId = request.UserConnectedId
             };
 
             _context.ChargingStations.Add(chargingStation);

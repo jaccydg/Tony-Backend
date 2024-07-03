@@ -199,6 +199,9 @@ namespace Tony_Backend.Infrastructure.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
+                    b.Property<Guid>("SubscriptionId")
+                        .HasColumnType("uuid");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
@@ -215,34 +218,44 @@ namespace Tony_Backend.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
+                    b.HasIndex("SubscriptionId");
+
                     b.ToTable("AspNetUsers", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = "7d6c3b1a-deb8-46be-a524-984c4409d16d",
+                            Id = "4664a79a-6d3b-4c39-98b5-b655cb769f82",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "671f503d-c9a8-4151-a288-80184f21da1a",
+                            ConcurrencyStamp = "07894613-57eb-43a7-86e2-cdafde098e6f",
                             Email = "giulio@giulio.com",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "-2120870629",
+                            NormalizedEmail = "GIULIO@GIULIO.COM",
+                            NormalizedUserName = "GIULIO@GIULIO.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE9SBLCJ9ilCSEh8YPa7FdufEgBvZNjuWDWtFHi/6k/8kyhV9W1uU5AtA+HVQDNaXw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5b62ecab-e2f8-4d9c-ad0d-38a168ac19c3",
-                            TwoFactorEnabled = false
+                            SecurityStamp = "5c5ebc09-5b38-4025-a3a4-109b87e3134d",
+                            SubscriptionId = new Guid("ab32905a-3f12-4ab5-bba8-791efcdb81a2"),
+                            TwoFactorEnabled = false,
+                            UserName = "giulio@giulio.com"
                         },
                         new
                         {
-                            Id = "31413c56-c404-454a-91a4-c60cff775059",
+                            Id = "440e2022-2917-4807-a5f6-58e66a6a4bbd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4f7028fc-e994-4118-9ac4-f0dd9cbd2924",
+                            ConcurrencyStamp = "b43fad5c-91e6-4185-ac68-a7e1e9cbc70e",
                             Email = "a@a.com",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "-152682125",
+                            NormalizedEmail = "A@A.COM",
+                            NormalizedUserName = "A@A.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBs6+gVu0+A7hIdC+8g0t0cyWwoctbalflDhKzQMzvfozn6OyTmXKq0/Y1aFUfyYIQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "856abb43-c65c-421d-bbdd-2db5df417f09",
-                            TwoFactorEnabled = false
+                            SecurityStamp = "f0a8e4e8-c4c3-4467-8616-6c324844b7f7",
+                            SubscriptionId = new Guid("f99d99ab-e389-4c48-8f52-ec620557289c"),
+                            TwoFactorEnabled = false,
+                            UserName = "a@a.com"
                         });
                 });
 
@@ -295,6 +308,58 @@ namespace Tony_Backend.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ChargingSessions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b5af9e5c-615a-46a3-a16f-505a997796c1"),
+                            ChargingStationId = new Guid("7df0da95-1aa9-4623-9889-4113ba0ee49e"),
+                            ChargingStationNumber = 1,
+                            GatewayId = new Guid("9d1c399a-5ad4-4dcb-a489-979d5626717b"),
+                            StartingDate = new DateTime(2024, 7, 3, 8, 15, 56, 530, DateTimeKind.Utc).AddTicks(2699),
+                            Status = "Ongoing",
+                            UserId = "4664a79a-6d3b-4c39-98b5-b655cb769f82"
+                        },
+                        new
+                        {
+                            Id = new Guid("69eb8e1a-f2c3-4789-871c-f7eb3466a259"),
+                            ChargingStationId = new Guid("33e3f93c-6b6f-4e43-bdde-16adef6f31b7"),
+                            ChargingStationNumber = 2,
+                            CostKWh = 0.42m,
+                            EndingDate = new DateTime(2024, 7, 2, 12, 15, 56, 530, DateTimeKind.Utc).AddTicks(2724),
+                            FinalConsuption = 25.5,
+                            FinalCost = 10.5m,
+                            GatewayId = new Guid("6e18b373-5c97-4ff0-ab8c-ceecd58989b3"),
+                            StartingDate = new DateTime(2024, 7, 2, 10, 15, 56, 530, DateTimeKind.Utc).AddTicks(2721),
+                            Status = "Completed",
+                            TotalTime = new TimeSpan(0, 2, 0, 0, 0),
+                            UserId = "4664a79a-6d3b-4c39-98b5-b655cb769f82"
+                        },
+                        new
+                        {
+                            Id = new Guid("db930ac6-28f5-4704-bbcc-06aad3373a52"),
+                            ChargingStationId = new Guid("7df0da95-1aa9-4623-9889-4113ba0ee49e"),
+                            ChargingStationNumber = 1,
+                            GatewayId = new Guid("6e18b373-5c97-4ff0-ab8c-ceecd58989b3"),
+                            StartingDate = new DateTime(2024, 7, 3, 8, 15, 56, 530, DateTimeKind.Utc).AddTicks(2747),
+                            Status = "Ongoing",
+                            UserId = "440e2022-2917-4807-a5f6-58e66a6a4bbd"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0e9234b-f4de-4637-98d7-e62aa8158f41"),
+                            ChargingStationId = new Guid("33e3f93c-6b6f-4e43-bdde-16adef6f31b7"),
+                            ChargingStationNumber = 2,
+                            CostKWh = 0.42m,
+                            EndingDate = new DateTime(2024, 7, 2, 12, 15, 56, 530, DateTimeKind.Utc).AddTicks(2750),
+                            FinalConsuption = 25.5,
+                            FinalCost = 10.5m,
+                            GatewayId = new Guid("6e18b373-5c97-4ff0-ab8c-ceecd58989b3"),
+                            StartingDate = new DateTime(2024, 7, 2, 10, 15, 56, 530, DateTimeKind.Utc).AddTicks(2750),
+                            Status = "Completed",
+                            TotalTime = new TimeSpan(0, 2, 0, 0, 0),
+                            UserId = "440e2022-2917-4807-a5f6-58e66a6a4bbd"
+                        });
                 });
 
             modelBuilder.Entity("Tony_Backend.Shared.Entities.ChargingStation", b =>
@@ -304,9 +369,6 @@ namespace Tony_Backend.Infrastructure.Migrations
 
                     b.Property<Guid>("GatewayId")
                         .HasColumnType("uuid");
-
-                    b.Property<string>("LastLog")
-                        .HasColumnType("text");
 
                     b.Property<int>("Number")
                         .HasColumnType("integer");
@@ -327,71 +389,71 @@ namespace Tony_Backend.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d7e958e1-b221-4558-a2d1-8a14e525589c"),
-                            GatewayId = new Guid("cfc6bf21-3540-44d1-bb7b-1287e2840108"),
+                            Id = new Guid("7df0da95-1aa9-4623-9889-4113ba0ee49e"),
+                            GatewayId = new Guid("9d1c399a-5ad4-4dcb-a489-979d5626717b"),
                             Number = 1,
                             Status = "Free"
                         },
                         new
                         {
-                            Id = new Guid("672ed01b-3dbf-412c-88da-c756c0bc4794"),
-                            GatewayId = new Guid("cfc6bf21-3540-44d1-bb7b-1287e2840108"),
+                            Id = new Guid("33e3f93c-6b6f-4e43-bdde-16adef6f31b7"),
+                            GatewayId = new Guid("9d1c399a-5ad4-4dcb-a489-979d5626717b"),
                             Number = 2,
                             Status = "Free"
                         },
                         new
                         {
-                            Id = new Guid("56d421ec-c195-4d37-b262-bfb8fb82a461"),
-                            GatewayId = new Guid("d49761ba-fcf5-419e-ae26-8e5019bf0105"),
+                            Id = new Guid("dd41716a-990f-4fca-a789-56299f1200a5"),
+                            GatewayId = new Guid("6e18b373-5c97-4ff0-ab8c-ceecd58989b3"),
                             Number = 1,
                             Status = "Free"
                         },
                         new
                         {
-                            Id = new Guid("6a6ea009-93a6-4007-8b55-50ea9ffa7279"),
-                            GatewayId = new Guid("d49761ba-fcf5-419e-ae26-8e5019bf0105"),
+                            Id = new Guid("42176c8a-aaa0-44e0-bbfa-43bbd180d128"),
+                            GatewayId = new Guid("6e18b373-5c97-4ff0-ab8c-ceecd58989b3"),
                             Number = 2,
                             Status = "Free"
                         },
                         new
                         {
-                            Id = new Guid("8e708c53-b835-4f81-8594-b1b06f2b7a7e"),
-                            GatewayId = new Guid("d49761ba-fcf5-419e-ae26-8e5019bf0105"),
+                            Id = new Guid("ecdd2e62-1f05-41dc-807a-f22fcda5c679"),
+                            GatewayId = new Guid("6e18b373-5c97-4ff0-ab8c-ceecd58989b3"),
                             Number = 3,
                             Status = "Free"
                         },
                         new
                         {
-                            Id = new Guid("ee86d492-c89f-4b31-a77e-6906984fa891"),
-                            GatewayId = new Guid("9753a3fe-47be-4cf5-a91b-3e57c0212f15"),
+                            Id = new Guid("5a509d46-ba42-4f24-a17e-e7111a11d79f"),
+                            GatewayId = new Guid("9249be30-9647-40d8-be3f-7f6299b23d79"),
                             Number = 1,
                             Status = "Free"
                         },
                         new
                         {
-                            Id = new Guid("68a87a8c-81ac-46fa-a1c6-88b5868631ed"),
-                            GatewayId = new Guid("9753a3fe-47be-4cf5-a91b-3e57c0212f15"),
+                            Id = new Guid("7ee49dba-31be-4024-8c46-d2be56484cc3"),
+                            GatewayId = new Guid("9249be30-9647-40d8-be3f-7f6299b23d79"),
                             Number = 2,
                             Status = "Free"
                         },
                         new
                         {
-                            Id = new Guid("1d4e1dc2-a3b8-435e-9ed3-dc2e4875d29b"),
-                            GatewayId = new Guid("9753a3fe-47be-4cf5-a91b-3e57c0212f15"),
+                            Id = new Guid("d98c683e-2be4-476e-af1d-95f71eeac6ca"),
+                            GatewayId = new Guid("9249be30-9647-40d8-be3f-7f6299b23d79"),
                             Number = 3,
                             Status = "Free"
                         },
                         new
                         {
-                            Id = new Guid("f93682ee-227f-4588-9654-b1994ac18a15"),
-                            GatewayId = new Guid("9753a3fe-47be-4cf5-a91b-3e57c0212f15"),
+                            Id = new Guid("0217fbe0-3fcf-4c04-b069-5244e2812c60"),
+                            GatewayId = new Guid("9249be30-9647-40d8-be3f-7f6299b23d79"),
                             Number = 4,
                             Status = "Free"
                         },
                         new
                         {
-                            Id = new Guid("2af4da64-b8ee-4d34-8e28-fdfb5b79e7a9"),
-                            GatewayId = new Guid("56be472b-8edf-4f41-acd3-3a25c0c0a46f"),
+                            Id = new Guid("f14b7511-b89e-45f4-8d58-4c53e8959481"),
+                            GatewayId = new Guid("6f672f1f-fb92-4332-af43-a282a85477a9"),
                             Number = 1,
                             Status = "Free"
                         });
@@ -418,28 +480,28 @@ namespace Tony_Backend.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cfc6bf21-3540-44d1-bb7b-1287e2840108"),
+                            Id = new Guid("9d1c399a-5ad4-4dcb-a489-979d5626717b"),
                             Latitude = 45.951543000000001,
                             Longitude = 12.680626999999999,
                             Name = "Consorzio Universitario"
                         },
                         new
                         {
-                            Id = new Guid("d49761ba-fcf5-419e-ae26-8e5019bf0105"),
+                            Id = new Guid("6e18b373-5c97-4ff0-ab8c-ceecd58989b3"),
                             Latitude = 45.953619000000003,
                             Longitude = 12.687381999999999,
                             Name = "Aldi - Pordenone"
                         },
                         new
                         {
-                            Id = new Guid("9753a3fe-47be-4cf5-a91b-3e57c0212f15"),
+                            Id = new Guid("9249be30-9647-40d8-be3f-7f6299b23d79"),
                             Latitude = 45.953282000000002,
                             Longitude = 12.672556,
                             Name = "Naonis Gym"
                         },
                         new
                         {
-                            Id = new Guid("56be472b-8edf-4f41-acd3-3a25c0c0a46f"),
+                            Id = new Guid("6f672f1f-fb92-4332-af43-a282a85477a9"),
                             Latitude = 45.9512,
                             Longitude = 12.675172,
                             Name = "Poste Italiane"
@@ -463,30 +525,57 @@ namespace Tony_Backend.Infrastructure.Migrations
                     b.Property<int>("PlaneName")
                         .HasColumnType("integer");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
                     b.ToTable("Subscriptions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ab32905a-3f12-4ab5-bba8-791efcdb81a2"),
+                            CostKWh = 0.25,
+                            MonthlyCost = 29.99m,
+                            MonthlyCredit = 100m,
+                            PlaneName = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("f99d99ab-e389-4c48-8f52-ec620557289c"),
+                            CostKWh = 0.34999999999999998,
+                            MonthlyCost = 0m,
+                            MonthlyCredit = 0m,
+                            PlaneName = 0
+                        });
                 });
 
             modelBuilder.Entity("Tony_Backend.Shared.Entities.TopUpWallet", b =>
                 {
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("numeric");
+                    b.Property<Guid>("WalletId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("WalletId")
-                        .HasColumnType("uuid");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("WalletId", "Date");
 
                     b.ToTable("TopUpWallets");
+
+                    b.HasData(
+                        new
+                        {
+                            WalletId = new Guid("6888ba4a-1ac7-4a00-8e97-5f2aed1c771c"),
+                            Date = new DateTime(2024, 6, 28, 10, 15, 56, 533, DateTimeKind.Utc).AddTicks(4120),
+                            Amount = 20m
+                        },
+                        new
+                        {
+                            WalletId = new Guid("79e28c98-abbd-4747-b77d-5bcde3dc4b24"),
+                            Date = new DateTime(2024, 6, 23, 10, 15, 56, 533, DateTimeKind.Utc).AddTicks(4125),
+                            Amount = 50m
+                        });
                 });
 
             modelBuilder.Entity("Tony_Backend.Shared.Entities.Wallet", b =>
@@ -510,6 +599,22 @@ namespace Tony_Backend.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Wallets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c4616a19-1b8a-4098-a0e6-42f165a0223e"),
+                            PayPerUseCredit = 20m,
+                            SubscriptionCredit = 50m,
+                            UserId = "4664a79a-6d3b-4c39-98b5-b655cb769f82"
+                        },
+                        new
+                        {
+                            Id = new Guid("dd30b1a4-5dbf-4d2e-8959-779444222af4"),
+                            PayPerUseCredit = 30m,
+                            SubscriptionCredit = 0m,
+                            UserId = "440e2022-2917-4807-a5f6-58e66a6a4bbd"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -563,6 +668,17 @@ namespace Tony_Backend.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Tony_Backend.Shared.Entities.ApplicationUser", b =>
+                {
+                    b.HasOne("Tony_Backend.Shared.Entities.Subscription", "Subscription")
+                        .WithMany("User")
+                        .HasForeignKey("SubscriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subscription");
+                });
+
             modelBuilder.Entity("Tony_Backend.Shared.Entities.ChargingSession", b =>
                 {
                     b.HasOne("Tony_Backend.Shared.Entities.ChargingStation", "ChargingStation")
@@ -601,17 +717,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                     b.Navigation("Gateway");
                 });
 
-            modelBuilder.Entity("Tony_Backend.Shared.Entities.Subscription", b =>
-                {
-                    b.HasOne("Tony_Backend.Shared.Entities.ApplicationUser", "User")
-                        .WithOne("Subscription")
-                        .HasForeignKey("Tony_Backend.Shared.Entities.Subscription", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Tony_Backend.Shared.Entities.Wallet", b =>
                 {
                     b.HasOne("Tony_Backend.Shared.Entities.ApplicationUser", "User")
@@ -627,9 +732,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                 {
                     b.Navigation("ChargingSessions");
 
-                    b.Navigation("Subscription")
-                        .IsRequired();
-
                     b.Navigation("Wallet")
                         .IsRequired();
                 });
@@ -642,6 +744,11 @@ namespace Tony_Backend.Infrastructure.Migrations
             modelBuilder.Entity("Tony_Backend.Shared.Entities.Gateway", b =>
                 {
                     b.Navigation("ChargingStations");
+                });
+
+            modelBuilder.Entity("Tony_Backend.Shared.Entities.Subscription", b =>
+                {
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

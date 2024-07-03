@@ -23,6 +23,8 @@ namespace Tony_Backend.Shared.Entities
         public int ChargingStationNumber { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime? EndingDate { get; set; }
+        public ChargingLog? LastLog { get; set; }
+
 
         public string UserId { get; set; }
         public Guid ChargingStationId { get; set; }
