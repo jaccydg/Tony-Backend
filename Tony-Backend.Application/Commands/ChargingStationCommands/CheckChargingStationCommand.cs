@@ -13,8 +13,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
 {
     public class CheckChargingStationCommand : IRequest<bool?>
     {
-        public required int Number { get; init; }
-        public required Guid GatewayId { get; init; }
+        public required Guid ChargingStationId { get; init; }
     }
 
     internal class CheckChargingStationByIdCommandHandler : IRequestHandler<CheckChargingStationCommand, bool?>
@@ -28,7 +27,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
         public async Task<bool?> Handle(CheckChargingStationCommand request, CancellationToken cancellationToken)
         {
             var chargingStation = await _context.ChargingStations
-                                 .Where(cs => cs.Number == request.Number && cs.GatewayId == request.GatewayId)
+                                 .Where(cs => cs.Id == request.ChargingStationId)
                                  .FirstOrDefaultAsync(cancellationToken);
 
             if (chargingStation == null)

@@ -119,10 +119,10 @@ namespace Tony_Backend.API.Controllers
             return Ok();
         }
 
-        [HttpGet("{number}/{gatewayId}/Check")]
-        public async Task<ActionResult<ChargingStation>> Check([FromRoute] int number, [FromRoute] Guid gatewayId)
+        [HttpGet("{chargingStationId}/Check")]
+        public async Task<ActionResult<ChargingStation>> Check([FromRoute] Guid chargingStationId)
         {
-            var chargingStation = await _sender.Send(new CheckChargingStationCommand() { Number = number, GatewayId = gatewayId });
+            var chargingStation = await _sender.Send(new CheckChargingStationCommand() { ChargingStationId = chargingStationId });
             if (chargingStation == null)
             {
                 return NotFound();
@@ -131,11 +131,11 @@ namespace Tony_Backend.API.Controllers
         }
 
         [Authorize]
-        [HttpPost("{number}/{gatewayId}/Connect")]
-        public async Task<IActionResult> Connect([FromRoute] int number, [FromRoute] Guid gatewayId)
+        [HttpPost("{chargingStationId}/Connect")] // da togliere gateway id
+        public async Task<IActionResult> Connect([FromRoute] Guid chargingStationId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var chargingStation = await _sender.Send(new ConnectChargingStationCommand() { Number = number, GatewayId = gatewayId, UserId = userId });
+            var chargingStation = await _sender.Send(new ConnectChargingStationCommand() { ChargingStationId = chargingStationId, UserId = userId });
             if (chargingStation == null)
             {
                 return NotFound();

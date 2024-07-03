@@ -27,7 +27,9 @@ builder.Services.AddCors(o => o.AddPolicy("AllowAllPolicy", builder =>
 {
     builder.WithOrigins(
         "https://localhost:8080",
-        "https://192.168.19.225:8080"
+        "https://192.168.19.225:8080",
+        "https://tonyapi.ddns.net",
+        "https://grand-vervet-settling.ngrok-free.app"
         )
            .AllowAnyMethod()
            .AllowAnyHeader()
