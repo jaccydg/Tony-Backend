@@ -24,7 +24,12 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
 
         public async Task<IEnumerable<ChargingStation>> Handle(GetAllChargingStationCommand request, CancellationToken cancellationToken)
         {
-            return await _context.ChargingStations.ToListAsync();
+            return await _context.ChargingStations
+                                                  //.Include(x => x.Gateway)
+                                                  //.Include(y => y.ChargingSessions)
+                                                  // Commented json ignore
+                                                  .ToListAsync();
+                                                 
 
         }
     }
