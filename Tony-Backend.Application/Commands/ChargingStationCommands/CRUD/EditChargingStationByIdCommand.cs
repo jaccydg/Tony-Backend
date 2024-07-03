@@ -11,26 +11,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
 {
-    public class EditChargingStationCommand : IRequest<ChargingStation>
+    public class EditChargingStationByIdCommand : IRequest<ChargingStation>
     {
-        public required int Number { get; init; }
-        public required int GatewayId { get; init; }
+        public required Guid Id { get; init; }
+        public required int? Number { get; init; }
+        public required Guid? GatewayId { get; init; }
         public required ChargingStationStatus? Status { get; init; }
-        public required int? UserConnectedId { get; init; }
-        public required int? LastLogId { get; init; }
+        public required string? UserConnectedId { get; init; }
+        public required string? LastLog { get; init; }
     }
 
-    internal class UpdateChargingStationCommandHandler : IRequestHandler<EditChargingStationCommand, ChargingStation>
+    internal class EditChargingStationByIdCommandHandler : IRequestHandler<EditChargingStationByIdCommand, ChargingStation>
     {
         private readonly ApplicationDbContext _context;
-        public UpdateChargingStationCommandHandler(ApplicationDbContext context)
+        public EditChargingStationByIdCommandHandler(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<ChargingStation> Handle(EditChargingStationCommand request, CancellationToken cancellationToken)
+        public async Task<ChargingStation> Handle(EditChargingStationByIdCommand request, CancellationToken cancellationToken)
         {
-            var chargingStation = await _context.ChargingStations.FindAsync(request.Number, request.GatewayId);
+            var chargingStation = await _context.ChargingStations.FindAsync(request.Id);
 
             if (chargingStation == null)
             {
@@ -47,9 +48,9 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
                 chargingStation.UserConnectedId = request.UserConnectedId;
             }
 
-            if (request.LastLogId != null)
+            if (request.LastLog != null)
             {
-                chargingStation.LastLogId = request.LastLogId;
+                chargingStation.LastLog = request.LastLog;
             }
 
             await _context.SaveChangesAsync();

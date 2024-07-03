@@ -8,7 +8,8 @@ namespace Tony_Backend.Shared.Entities
 {
     public class TopUpWallet
     {
-        public DateTime DateAmount { get; set; }
+        public Guid WalletId { get; set; }
+        public DateTime Date { get; set; }
         public decimal Amount { get; set; } = 0;
     }
 }

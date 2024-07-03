@@ -13,8 +13,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
 {
     public class GetChargingStationByIdCommand : IRequest<ChargingStation>
     {
-        public required int Number { get; init; }
-        public required int GatewayId { get; init; }
+        public required Guid Id { get; init; }
     }
 
     internal class GetChargingStationByIdCommandHandler : IRequestHandler<GetChargingStationByIdCommand, ChargingStation>
@@ -27,7 +26,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
 
         public async Task<ChargingStation> Handle(GetChargingStationByIdCommand request, CancellationToken cancellationToken)
         {
-            return await _context.ChargingStations.FindAsync(request.Number, request.GatewayId);
+            return await _context.ChargingStations.FindAsync(request.Id);
         }
     }
 }

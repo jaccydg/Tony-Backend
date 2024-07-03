@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Tony_Backend.Shared.Entities
@@ -15,9 +17,12 @@ namespace Tony_Backend.Shared.Entities
         public decimal MonthlyCost { get; set; } = 0;
         public decimal MonthlyCredit { get; set; } = 0;
         public double CostKWh { get; set; } = 0;
-        public Guid UserId { get; set; }
 
+        public string UserId { get; set; }
 
+        // navigation properties
+        [JsonIgnore]
+        public ApplicationUser User { get; set; }
     }
 
     public enum Plane

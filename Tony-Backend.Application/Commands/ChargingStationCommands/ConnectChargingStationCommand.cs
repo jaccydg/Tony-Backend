@@ -19,7 +19,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
     public class ConnectChargingStationCommand : IRequest<bool?>
     {
         public required int Number { get; init; }
-        public required int GatewayId { get; init; }
+        public required Guid GatewayId { get; init; }
         public required string UserId { get; init; }
     }
 

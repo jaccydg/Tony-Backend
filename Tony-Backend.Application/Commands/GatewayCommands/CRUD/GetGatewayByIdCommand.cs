@@ -12,7 +12,7 @@ namespace Tony_Backend.Application.Commands.GatewayCommands.CRUD
 {
     public class GetGatewayByIdCommand : IRequest<Gateway>
     {
-        public required int Id { get; init; }
+        public required Guid Id { get; init; }
     }
 
     internal class GetGatewayByIdCommandHandler : IRequestHandler<GetGatewayByIdCommand, Gateway>

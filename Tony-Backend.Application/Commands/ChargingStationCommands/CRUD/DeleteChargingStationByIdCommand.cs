@@ -10,23 +10,22 @@ using Tony_Backend.Shared.Entities;
 
 namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
 {
-    public class DeleteChargingStationCommand : IRequest<bool>
+    public class DeleteChargingStationByIdCommand : IRequest<bool>
     {
-        public required int Number { get; init; }
-        public required int GatewayId { get; init; }
+        public required Guid Id { get; init; }
     }
 
-    internal class DeleteChargingStationCommandHandler : IRequestHandler<DeleteChargingStationCommand, bool>
+    internal class DeleteChargingStationByIdCommandHandler : IRequestHandler<DeleteChargingStationByIdCommand, bool>
     {
         private readonly ApplicationDbContext _context;
-        public DeleteChargingStationCommandHandler(ApplicationDbContext context)
+        public DeleteChargingStationByIdCommandHandler(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<bool> Handle(DeleteChargingStationCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteChargingStationByIdCommand request, CancellationToken cancellationToken)
         {
-            var chargingStation = await _context.ChargingStations.FindAsync(request.Number, request.GatewayId);
+            var chargingStation = await _context.ChargingStations.FindAsync(request.Id);
 
             if (chargingStation == null)
             {
