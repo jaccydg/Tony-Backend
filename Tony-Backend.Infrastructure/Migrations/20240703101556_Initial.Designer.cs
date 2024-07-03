@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Tony_Backend.API.Data;
@@ -11,9 +12,11 @@ using Tony_Backend.API.Data;
 namespace Tony_Backend.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240703101556_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,7 +205,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                     b.Property<Guid>("SubscriptionId")
                         .HasColumnType("uuid");
 
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
@@ -257,7 +259,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                             SubscriptionId = new Guid("f99d99ab-e389-4c48-8f52-ec620557289c"),
                             TwoFactorEnabled = false,
                             UserName = "a@a.com"
-
                         });
                 });
 
@@ -362,7 +363,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                             TotalTime = new TimeSpan(0, 2, 0, 0, 0),
                             UserId = "440e2022-2917-4807-a5f6-58e66a6a4bbd"
                         });
-
                 });
 
             modelBuilder.Entity("Tony_Backend.Shared.Entities.ChargingStation", b =>
@@ -394,7 +394,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         {
                             Id = new Guid("7df0da95-1aa9-4623-9889-4113ba0ee49e"),
                             GatewayId = new Guid("9d1c399a-5ad4-4dcb-a489-979d5626717b"),
-
                             Number = 1,
                             Status = "Free"
                         },
@@ -402,7 +401,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         {
                             Id = new Guid("33e3f93c-6b6f-4e43-bdde-16adef6f31b7"),
                             GatewayId = new Guid("9d1c399a-5ad4-4dcb-a489-979d5626717b"),
-
                             Number = 2,
                             Status = "Free"
                         },
@@ -410,7 +408,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         {
                             Id = new Guid("dd41716a-990f-4fca-a789-56299f1200a5"),
                             GatewayId = new Guid("6e18b373-5c97-4ff0-ab8c-ceecd58989b3"),
-
                             Number = 1,
                             Status = "Free"
                         },
@@ -418,7 +415,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         {
                             Id = new Guid("42176c8a-aaa0-44e0-bbfa-43bbd180d128"),
                             GatewayId = new Guid("6e18b373-5c97-4ff0-ab8c-ceecd58989b3"),
-
                             Number = 2,
                             Status = "Free"
                         },
@@ -426,7 +422,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         {
                             Id = new Guid("ecdd2e62-1f05-41dc-807a-f22fcda5c679"),
                             GatewayId = new Guid("6e18b373-5c97-4ff0-ab8c-ceecd58989b3"),
-
                             Number = 3,
                             Status = "Free"
                         },
@@ -434,7 +429,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         {
                             Id = new Guid("5a509d46-ba42-4f24-a17e-e7111a11d79f"),
                             GatewayId = new Guid("9249be30-9647-40d8-be3f-7f6299b23d79"),
-
                             Number = 1,
                             Status = "Free"
                         },
@@ -442,7 +436,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         {
                             Id = new Guid("7ee49dba-31be-4024-8c46-d2be56484cc3"),
                             GatewayId = new Guid("9249be30-9647-40d8-be3f-7f6299b23d79"),
-
                             Number = 2,
                             Status = "Free"
                         },
@@ -450,7 +443,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         {
                             Id = new Guid("d98c683e-2be4-476e-af1d-95f71eeac6ca"),
                             GatewayId = new Guid("9249be30-9647-40d8-be3f-7f6299b23d79"),
-
                             Number = 3,
                             Status = "Free"
                         },
@@ -458,7 +450,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         {
                             Id = new Guid("0217fbe0-3fcf-4c04-b069-5244e2812c60"),
                             GatewayId = new Guid("9249be30-9647-40d8-be3f-7f6299b23d79"),
-
                             Number = 4,
                             Status = "Free"
                         },
@@ -466,7 +457,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         {
                             Id = new Guid("f14b7511-b89e-45f4-8d58-4c53e8959481"),
                             GatewayId = new Guid("6f672f1f-fb92-4332-af43-a282a85477a9"),
-
                             Number = 1,
                             Status = "Free"
                         });
@@ -494,7 +484,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("9d1c399a-5ad4-4dcb-a489-979d5626717b"),
-
                             Latitude = 45.951543000000001,
                             Longitude = 12.680626999999999,
                             Name = "Consorzio Universitario"
@@ -502,7 +491,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("6e18b373-5c97-4ff0-ab8c-ceecd58989b3"),
-
                             Latitude = 45.953619000000003,
                             Longitude = 12.687381999999999,
                             Name = "Aldi - Pordenone"
@@ -510,7 +498,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("9249be30-9647-40d8-be3f-7f6299b23d79"),
-
                             Latitude = 45.953282000000002,
                             Longitude = 12.672556,
                             Name = "Naonis Gym"
@@ -518,7 +505,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("6f672f1f-fb92-4332-af43-a282a85477a9"),
-
                             Latitude = 45.9512,
                             Longitude = 12.675172,
                             Name = "Poste Italiane"
@@ -563,14 +549,12 @@ namespace Tony_Backend.Infrastructure.Migrations
                             MonthlyCredit = 0m,
                             PlaneName = 0
                         });
-
                 });
 
             modelBuilder.Entity("Tony_Backend.Shared.Entities.TopUpWallet", b =>
                 {
                     b.Property<Guid>("WalletId")
                         .HasColumnType("uuid");
-
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
@@ -595,7 +579,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                             Date = new DateTime(2024, 6, 23, 10, 15, 56, 533, DateTimeKind.Utc).AddTicks(4125),
                             Amount = 50m
                         });
-
                 });
 
             modelBuilder.Entity("Tony_Backend.Shared.Entities.Wallet", b =>
@@ -635,7 +618,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                             SubscriptionCredit = 0m,
                             UserId = "440e2022-2917-4807-a5f6-58e66a6a4bbd"
                         });
-
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -699,7 +681,6 @@ namespace Tony_Backend.Infrastructure.Migrations
 
                     b.Navigation("Subscription");
                 });
-
 
             modelBuilder.Entity("Tony_Backend.Shared.Entities.ChargingSession", b =>
                 {
@@ -772,7 +753,6 @@ namespace Tony_Backend.Infrastructure.Migrations
                 {
                     b.Navigation("User");
                 });
-
 #pragma warning restore 612, 618
         }
     }

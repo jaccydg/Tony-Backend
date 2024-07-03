@@ -1,4 +1,5 @@
-﻿using MediatR;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,12 @@ namespace Tony_Backend.Application.Commands.ChargingSessionCommands.CRUD
                 Status = 0,             // Ongoing
                 UserId = request.UserId.ToString(),
                 ChargingStationNumber = request.ChargingStationNumber,
+                ChargingStationId = await _context.ChargingStations
+                                              .Where(cs => cs.Number == request.ChargingStationNumber 
+                                                       &&  cs.GatewayId == request.GatewayId)
+                                              .Select(cs => cs.Id)
+                                              .FirstOrDefaultAsync(cancellationToken),
+
                 GatewayId = request.GatewayId,
                 StartingDate = DateTime.UtcNow,
             };

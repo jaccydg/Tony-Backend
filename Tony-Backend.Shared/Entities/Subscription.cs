@@ -18,11 +18,10 @@ namespace Tony_Backend.Shared.Entities
         public decimal MonthlyCredit { get; set; } = 0;
         public double CostKWh { get; set; } = 0;
 
-        public string UserId { get; set; }
-
         // navigation properties
         [JsonIgnore]
-        public ApplicationUser User { get; set; }
+        public List<ApplicationUser> User { get; set; }
+
     }
 
     public enum Plane

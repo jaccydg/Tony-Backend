@@ -52,6 +52,8 @@ namespace Tony_Backend.API.Data
                 entity
                     .Property(cs => cs.GatewayId)
                     .IsRequired();
+
+                entity.Ignore(cs => cs.LastLog);
             });
 
             modelBuilder.Entity<ChargingStation>(entity =>
@@ -96,18 +98,15 @@ namespace Tony_Backend.API.Data
                 entity
                     .Property(cs => cs.Id).ValueGeneratedNever();
                 entity
-                    .HasOne(w => w.User)
+                    .HasMany(w => w.User)
                     .WithOne(u => u.Subscription)
-                    .HasForeignKey<Subscription>(w => w.UserId);
+                    .HasForeignKey(u => u.SubscriptionId);
+
             });
 
             modelBuilder.Entity<TopUpWallet>(entity =>
             {
-                entity.HasNoKey();
-
-                entity.Property(t => t.WalletId).IsRequired();
-                entity.Property(t => t.Amount).IsRequired();
-                entity.Property(t => t.Date).IsRequired();
+                entity.HasKey(t => new { t.WalletId, t.Date });
             });
 
             modelBuilder.Entity<Wallet>(entity =>
@@ -123,6 +122,9 @@ namespace Tony_Backend.API.Data
             });
 
 
+
+
+
             // SEED DATA
             var gatewayList = new List<Gateway>
             {
@@ -135,7 +137,9 @@ namespace Tony_Backend.API.Data
             modelBuilder.Entity<Gateway>()
                 .HasData(gatewayList);
 
-            modelBuilder.Entity<ChargingStation>().HasData(
+            var charginStationList = new List<ChargingStation>
+            {
+
                 new ChargingStation { Id = Guid.NewGuid(), Number = 1, GatewayId = gatewayList[0].Id, Status = ChargingStationStatus.Free },
                 new ChargingStation { Id = Guid.NewGuid(), Number = 2, GatewayId = gatewayList[0].Id, Status = ChargingStationStatus.Free },
                 new ChargingStation { Id = Guid.NewGuid(), Number = 1, GatewayId = gatewayList[1].Id, Status = ChargingStationStatus.Free },
@@ -146,11 +150,197 @@ namespace Tony_Backend.API.Data
                 new ChargingStation { Id = Guid.NewGuid(), Number = 3, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
                 new ChargingStation { Id = Guid.NewGuid(), Number = 4, GatewayId = gatewayList[2].Id, Status = ChargingStationStatus.Free },
                 new ChargingStation { Id = Guid.NewGuid(), Number = 1, GatewayId = gatewayList[3].Id, Status = ChargingStationStatus.Free }
+            };
+
+            modelBuilder.Entity<ChargingStation>().HasData(charginStationList);
+
+            var subscription1 = new Subscription
+            {
+                Id = Guid.NewGuid(),
+                PlaneName = Plane.Premium,
+                MonthlyCost = 29.99m,
+                MonthlyCredit = 100,
+                CostKWh = 0.25
+            };
+
+            var subscription2 = new Subscription
+            {
+                Id = Guid.NewGuid(),
+                PlaneName = Plane.Free,
+                MonthlyCost = 0,
+                MonthlyCredit = 0,
+                CostKWh = 0.35
+            };
+
+
+            modelBuilder.Entity<Subscription>().HasData(subscription1, subscription2);
+
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            var user1 = new ApplicationUser
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = "giulio@giulio.com",
+                NormalizedUserName = "GIULIO@GIULIO.COM",
+                Email = "giulio@giulio.com",
+                NormalizedEmail = "GIULIO@GIULIO.COM",
+                EmailConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+                SubscriptionId = subscription1.Id
+            };
+            user1.PasswordHash = hasher.HashPassword(user1, "Ciaociao35@");
+
+            var user2 = new ApplicationUser
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = "a@a.com",
+                NormalizedUserName = "A@A.COM",
+                Email = "a@a.com",
+                NormalizedEmail = "A@A.COM",
+                EmailConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+                SubscriptionId = subscription2.Id
+            };
+            user2.PasswordHash = hasher.HashPassword(user2, "Password1!");
+
+            modelBuilder.Entity<ApplicationUser>().HasData(user1, user2);
+
+            var chargingSessions = new List<ChargingSession>
+            {
+                new ChargingSession
+                {
+                    Id = Guid.NewGuid(),
+                    Status = ChargingSessionStatus.Ongoing,
+                    StartingDate = DateTime.UtcNow.AddHours(-2),
+                    UserId = user1.Id,
+                    ChargingStationId = charginStationList[0].Id,
+                    GatewayId = gatewayList[0].Id,
+                    ChargingStationNumber = 1
+                },
+                new ChargingSession
+                {
+                    Id = Guid.NewGuid(),
+                    Status = ChargingSessionStatus.Completed,
+                    StartingDate = DateTime.UtcNow.AddDays(-1),
+                    EndingDate = DateTime.UtcNow.AddDays(-1).AddHours(2),
+                    FinalCost = 10.5m,
+                    FinalConsuption = 25.5,
+                    TotalTime = TimeSpan.FromHours(2),
+                    CostKWh = 0.42m,
+                    UserId = user1.Id,
+                    ChargingStationId = charginStationList[1].Id,
+                    GatewayId = gatewayList[1].Id,
+                    ChargingStationNumber = 2
+                },
+                new ChargingSession
+                {
+                    Id = Guid.NewGuid(),
+                    Status = ChargingSessionStatus.Ongoing,
+                    StartingDate = DateTime.UtcNow.AddHours(-2),
+                    UserId = user2.Id,
+                    ChargingStationId = charginStationList[0].Id,
+                    GatewayId = gatewayList[1].Id,
+                    ChargingStationNumber = 1,
+                },
+                new ChargingSession
+                {
+                    Id = Guid.NewGuid(),
+                    Status = ChargingSessionStatus.Completed,
+                    StartingDate = DateTime.UtcNow.AddDays(-1),
+                    EndingDate = DateTime.UtcNow.AddDays(-1).AddHours(2),
+                    FinalCost = 10.5m,
+                    FinalConsuption = 25.5,
+                    TotalTime = TimeSpan.FromHours(2),
+                    CostKWh = 0.42m,
+                    UserId = user2.Id,
+                    ChargingStationId = charginStationList[1].Id,
+                    GatewayId = gatewayList[1].Id,
+                    ChargingStationNumber = 2
+                }
+            };
+
+            var chargingLogs = new List<ChargingLog>
+            {
+                new ChargingLog
+                {
+                    Date = DateTime.UtcNow.AddDays(-1).AddHours(-1),
+                    Speed = 50,
+                    Consumption = 12.5,
+                    Cost = 5.25m,
+                    Time = TimeSpan.FromMinutes(30),
+                    ChargingSessionId = chargingSessions[0].Id.ToString(),
+                    UserId = user1.Id
+                },
+                new ChargingLog
+                {
+                    Date = DateTime.UtcNow.AddDays(-2).AddHours(-1),
+                    Speed = 50,
+                    Consumption = 12.5,
+                    Cost = 5.25m,
+                    Time = TimeSpan.FromMinutes(30),
+                    ChargingSessionId = chargingSessions[1].Id.ToString(),
+                    UserId = user1.Id
+                },
+                new ChargingLog
+                {
+                    Date = DateTime.UtcNow.AddDays(-1).AddHours(-1),
+                    Speed = 50,
+                    Consumption = 12.5,
+                    Cost = 5.25m,
+                    Time = TimeSpan.FromMinutes(30),
+                    ChargingSessionId = chargingSessions[2].Id.ToString(),
+                    UserId = user2.Id
+                },
+                new ChargingLog
+                {
+                    Date = DateTime.UtcNow.AddDays(-2).AddHours(-1),
+                    Speed = 50,
+                    Consumption = 12.5,
+                    Cost = 5.25m,
+                    Time = TimeSpan.FromMinutes(30),
+                    ChargingSessionId = chargingSessions[3].Id.ToString(),
+                    UserId = user2.Id
+                }
+            };
+
+            chargingSessions[0].LastLog = chargingLogs[0];
+            chargingSessions[1].LastLog = chargingLogs[1];
+            chargingSessions[2].LastLog = chargingLogs[2];
+            chargingSessions[3].LastLog = chargingLogs[3];
+
+            modelBuilder.Entity<ChargingSession>().HasData(chargingSessions);
+
+            modelBuilder.Entity<Wallet>().HasData(
+                new Wallet
+                {
+                    Id = Guid.NewGuid(),
+                    SubscriptionCredit = 50,
+                    PayPerUseCredit = 20,
+                    UserId = user1.Id
+                },
+                new Wallet
+                {
+                    Id = Guid.NewGuid(),
+                    SubscriptionCredit = 0,
+                    PayPerUseCredit = 30,
+                    UserId = user2.Id
+                }
             );
 
-            modelBuilder.Entity<ApplicationUser>().HasData(
-                new ApplicationUser { Email = "giulio@giulio.com", PasswordHash = "Ciaociao35@".GetHashCode().ToString() },
-                new ApplicationUser { Email = "a@a.com", PasswordHash = "Password1!".GetHashCode().ToString() }
+            modelBuilder.Entity<TopUpWallet>().HasData(
+                new TopUpWallet
+                {
+                    WalletId = Guid.NewGuid(),
+                    Date = DateTime.UtcNow.AddDays(-5),
+                    Amount = 20
+                },
+                new TopUpWallet
+                {
+                    WalletId = Guid.NewGuid(),
+                    Date = DateTime.UtcNow.AddDays(-10),
+                    Amount = 50
+                }
+
             );
 
         }

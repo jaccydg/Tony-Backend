@@ -10,7 +10,7 @@ namespace Tony_Backend.Shared.Helpers
     {
         private static AmazonSQSClient _sqsClient;
         // TODO: use variable from appsetting
-        private static string _connectionString = "https://sqs.eu-west-1.amazonaws.com/240595528763/clod-digregorio-projectwork-1.fifo";
+        private static string _connectionString = "https://sqs.eu-west-1.amazonaws.com/240595528763/clod-pw-g2-tony-queue-1.fifo";
 
         private static readonly string groupId = "to-gateway";
 

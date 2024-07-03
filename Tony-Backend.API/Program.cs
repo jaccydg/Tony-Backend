@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using Tony_Backend.API.Data;
 using Tony_Backend.Application;
 using Tony_Backend.Shared.Entities;
@@ -26,14 +27,24 @@ builder.Services.AddCors(o => o.AddPolicy("AllowAllPolicy", builder =>
 {
     builder.WithOrigins(
         "https://localhost:8080",
-        "https://192.168.19.225:8080"
+        "https://192.168.19.225:8080",
+        "https://tonyapi.ddns.net",
+        "https://grand-vervet-settling.ngrok-free.app"
         )
            .AllowAnyMethod()
            .AllowAnyHeader()
            .AllowCredentials();
 }));
 
-builder.Services.AddControllers();
+
+// Add services to the container.
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+        options.JsonSerializerOptions.WriteIndented = true;
+    });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

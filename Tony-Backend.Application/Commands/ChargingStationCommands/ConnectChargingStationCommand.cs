@@ -18,8 +18,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
 {
     public class ConnectChargingStationCommand : IRequest<bool?>
     {
-        public required int Number { get; init; }
-        public required Guid GatewayId { get; init; }
+        public required Guid ChargingStationId { get; init; }
         public required string UserId { get; init; }
     }
 
@@ -39,16 +38,22 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands
         public async Task<bool?> Handle(ConnectChargingStationCommand request, CancellationToken cancellationToken)
         {
             // Check if charging station exists ad is free
-            var chargingStationStatus = await _sender.Send(new CheckChargingStationCommand() { Number = request.Number, GatewayId = request.GatewayId });
+            var chargingStationStatus = await _sender.Send(new CheckChargingStationCommand() { ChargingStationId = request.ChargingStationId });
             if (chargingStationStatus == null || chargingStationStatus == false)
             {
                 return null;
             }
 
+            var gatewayId = _context.ChargingStations
+                .Where(cs => cs.Id == request.ChargingStationId)
+                .Select(cs => cs.GatewayId)
+                .FirstOrDefault();
+
             var message = new
             {
-                request.Number,
-                request.GatewayId,
+                RequestType = RequestType.Connection,
+                request.ChargingStationId,
+                GatewayId = gatewayId,
                 request.UserId
             }.ToString();
 

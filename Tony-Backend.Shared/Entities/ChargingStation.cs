@@ -14,7 +14,7 @@ namespace Tony_Backend.Shared.Entities
         public int Number { get; set; }
         public ChargingStationStatus? Status { get; set; }
         public string? UserConnectedId { get; set; }
-        public string? LastLog { get; set; }
+
 
         public Guid GatewayId { get; set; }
 
