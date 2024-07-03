@@ -15,6 +15,7 @@ namespace Tony_Backend.Shared.Entities
         public ChargingStationStatus? Status { get; set; }
         public string? UserConnectedId { get; set; }
 
+
         public Guid GatewayId { get; set; }
 
         // Navigation properties

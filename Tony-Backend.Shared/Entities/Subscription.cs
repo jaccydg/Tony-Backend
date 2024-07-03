@@ -21,6 +21,7 @@ namespace Tony_Backend.Shared.Entities
         // navigation properties
         [JsonIgnore]
         public List<ApplicationUser> User { get; set; }
+
     }
 
     public enum Plane

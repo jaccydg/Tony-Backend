@@ -20,5 +20,6 @@ namespace Tony_Backend.Shared.Entities
         [JsonIgnore]
         public Subscription Subscription { get; set; }
         public Guid SubscriptionId { get; set; }
+
     }
 }

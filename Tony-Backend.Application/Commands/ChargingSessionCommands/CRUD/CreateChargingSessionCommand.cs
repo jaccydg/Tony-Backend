@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -39,6 +39,7 @@ namespace Tony_Backend.Application.Commands.ChargingSessionCommands.CRUD
                                                        &&  cs.GatewayId == request.GatewayId)
                                               .Select(cs => cs.Id)
                                               .FirstOrDefaultAsync(cancellationToken),
+
                 GatewayId = request.GatewayId,
                 StartingDate = DateTime.UtcNow,
             };

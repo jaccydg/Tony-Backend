@@ -48,7 +48,7 @@ namespace Tony_Backend.Application.Commands.ChargingStationCommands.CRUD
             {
                 chargingStation.UserConnectedId = request.UserConnectedId;
             }
-
+            
             await _context.SaveChangesAsync();
 
             return chargingStation;

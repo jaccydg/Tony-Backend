@@ -101,6 +101,7 @@ namespace Tony_Backend.API.Data
                     .HasMany(w => w.User)
                     .WithOne(u => u.Subscription)
                     .HasForeignKey(u => u.SubscriptionId);
+
             });
 
             modelBuilder.Entity<TopUpWallet>(entity =>
@@ -123,6 +124,7 @@ namespace Tony_Backend.API.Data
 
 
 
+
             // SEED DATA
             var gatewayList = new List<Gateway>
             {
@@ -137,6 +139,7 @@ namespace Tony_Backend.API.Data
 
             var charginStationList = new List<ChargingStation>
             {
+
                 new ChargingStation { Id = Guid.NewGuid(), Number = 1, GatewayId = gatewayList[0].Id, Status = ChargingStationStatus.Free },
                 new ChargingStation { Id = Guid.NewGuid(), Number = 2, GatewayId = gatewayList[0].Id, Status = ChargingStationStatus.Free },
                 new ChargingStation { Id = Guid.NewGuid(), Number = 1, GatewayId = gatewayList[1].Id, Status = ChargingStationStatus.Free },
@@ -337,6 +340,7 @@ namespace Tony_Backend.API.Data
                     Date = DateTime.UtcNow.AddDays(-10),
                     Amount = 50
                 }
+
             );
 
         }

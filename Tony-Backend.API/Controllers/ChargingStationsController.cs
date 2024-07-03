@@ -133,6 +133,7 @@ namespace Tony_Backend.API.Controllers
         [Authorize]
         [HttpPost("{chargingStationId}/Connect")] // da togliere gateway id
         public async Task<IActionResult> Connect([FromRoute] Guid chargingStationId)
+
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var chargingStation = await _sender.Send(new ConnectChargingStationCommand() { ChargingStationId = chargingStationId, UserId = userId });
